@@ -1,15 +1,51 @@
-<h1>Dynamic-Charts</h1>
+<!DOCTYPE html>
+<html>
+	<head>
+	  <meta charset=utf-8 />
+	  <title>  Dynamic-Charts |  M+ Blog </title>
+	  <link rel="stylesheet" href="/css/styles.css" />
+	  <link rel="stylesheet" href="/css/skeleton/base.css">
+	  <link rel="stylesheet" href="/css/skeleton/skeleton.css">
+	  <link rel="stylesheet" href="/css/skeleton/layout.css">
+	  <link rel="stylesheet" href="/css/main.css">
+	  <link rel="stylesheet" href="/css/docco.css">
+	  <link rel="stylesheet" href="/css/styles/googlecode.min.css">
+	</head>
+	<body>
+	<div class="container">
+		<div class="three columns sidebar">
+			<nav>
+				<h4 id="logo">M+ Blog</h4>
+				<ul>
+ 					<li><a href="/">Home</a></li>
+					<!-- li><a href="/archive">Archive</a></li> -->
+					<h5>"When I grow up, I wanna be a javascript ninja."</h5>
+					&nbsp;
+					<h5>During the past 10 years I have been coding in most known programming languages, working all around Italy and Europe.</h5>
+					&nbsp;
+					<h5>Follow me:</h5>
+						<table>
+						    <tr>
+							<td><a href="https://twitter.com/marcellolarocca"><img src="/images/share_twitter.png"/></a></td>
+							<td><a href="https://plus.google.com/u/0/116060034086134836013/posts"><img src="/images/share_g+.png"/></a></td>
+							<td><a href="https://github.com/mlarocca"><img src="/images/share_github.png"/></a></td>
+							<td><a href="http://thound.org"><img src="/images/share_link.png"/></a></td>
+						    </tr>						
+						</table>
+					
+				</ul>
+			</nav>
 
-<h1></h1>
+			&nbsp;
+		</div>
+		<div class="sixteen columns content">
+		<div id="post">
+	<h1>Dynamic-Charts</h1>
+	    <p>Dynamic-Charts is a high-level lib built on <em>D3js</em> to allow for easy and quick development of dynamically populated charts, especially thought to represent live, real-time data.</p>
 
-<p>This is a high-level lib built on <em>D3js</em> to allow for easy and quick development of dynamically populated charts, especially thought to represent live, real-time data.</p>
-
-<ul>
-<li><strong>Minified</strong> : https://raw.github.com/mlarocca/Dynamic-Charts/master/dynamic_chart.min.js</li>
-<li><strong>Docs</strong>: http://mlarocca.github.com/Dynamic-Charts/</li>
-</ul>
-
-<h2>Version 0.2</h2>
+<p>Four charts are available now (a fifth is going to be added soon): 3 bar charts (a more basic one with bars&#39; size adjusting according to the size of the dataset plot and 2 more advanced ones for which the bar size is fixed and set on creation, and older data is discarded - in a settable ratio - to make room for new values), plus a &quot;wheel&quot; chart especially thought for plotting data literally &quot;on the clock&quot;.
+All of these charts support multidimensional data and can be fed with custom formatted data, by setting an appropriate custom &quot;interpreter&quot; function, so that, for example, JSON support is easily and automatically achieved.
+All of them, moreover, are higly customizable in their appearance: colors, backgrounds, labels size and color, axes (position, colors, visibility, size, number of nothces), titles and so on.</p>
 
 <table>
   <tr height="146" valign="top">
@@ -18,50 +54,23 @@
   </tr>
 </table>
 
-<h3>What&#39;s new</h3>
+<p>Please take a look at documentation here: http://mlarocca.github.com/Dynamic-Charts</p>
 
-<h4>WARNING: Back Compatibility alert: Interface have undergone many different changes:</h4>
+</div>
 
+<div id="post_links">
 <ul>
-<li>Every Constructor&#39;s parameters list has been modified, so take care, if you need support for older version, you just need to update your src field to point to version 0.1 folder (see below).</li>
-<li>Some methods have been renamed (see documentation for a list of deprecated methods), and many new methods have been added.</li>
+	<li><a href="../">Index</a></li>
+	 
+		<li><span>19 Dec 2012</span>  <a href="/12-19-2012/javascript_OOE.html">Combining effective encapsulation and inheritance in JavaScript</a></li>
+	 
+	 
 </ul>
+</div>
 
-<p>Since I realize how painful it could get to review all of your code in order to switch to a new version,
-support to the old versions of the libs will be maintained; from now on, each release minified version will be uploaded to two locations:
-* <strong><em>/Dynamic-Charts/master/dynamic</em>chart.min.js_</strong> will always point to the most recent version;
-* <strong><em>/Dynamic-Charts/master/vX</em>Y/dynamic<em>chart.vX</em>Y.min.js_</strong> will point to version X.Y; this release will only be updated to fix bugs, but no change in the interface will be made, so that the permalink to the lib will work over time.</p>
 
-<p>I apologize for the hassle, but some change was needed to improve the lib, which was not in a stable release yet. We&#39;ll try to keep these changes to a minimum in the future.</p>
+		</div>
+	</div>
 
-<h4>New features</h4>
-
-<ul>
-<li>  <em>setAbbreviatedLabel</em>, <em>setExtendedLabel</em>: For each subcomponent of the data, labels can be abbreviated using scientific notation for numbers whose absolute value is smaller than 1, or standard abbreviations (like 1.3K or 43.8M) for numbers greater than 1.</li>
-<li>  The layout of the chart has been enhanced to include the appropriate space for four margin areas: One above the core of the chart, one on its left, one on its right, and one below it.
-
-<ul>
-<li>      The size of these margins can be set on construction ONLY (a new parameter has been added to the charts&#39; contructors);</li>
-<li>      The Title of the chart is added to the top area;</li>
-<li>      The x axe is added by default to the left area, but can also be moved to the right;</li>
-<li>      The y axe is added to the bottom area.</li>
-</ul></li>
-<li>  <em>setInnerBackgroundColor</em>, <em>setOuterBackgroundColor</em>, <em>setInnerBorder</em>, <em>setOuterBorder</em>: Background color and border can be set for the outer area, including the 4 axes, and the main chart area, where the data will actually be plot.</li>
-<li>  <em>setVerticalAxe</em>, <em>setHorizontalAxe</em>: vertical and horizontal axes are now supported and can be added or hidden at runtime.</li>
-</ul>
-
-<h3>Downloads</h3>
-
-<ul>
-<li><strong>Source</strong>: https://github.com/mlarocca/Dynamic-Charts/tree/master/v0_2/</li>
-<li><strong>Minified</strong> (persistent link): https://raw.github.com/mlarocca/Dynamic-Charts/master/v0<em>2/dynamic</em>chart.v0_2.min.js</li>
-<li><strong>Docs</strong>: http://mlarocca.github.com/Dynamic-Charts/v0_2</li>
-</ul>
-
-<h2>Version 0.1</h2>
-
-<ul>
-<li><strong>Source</strong>: https://github.com/mlarocca/Dynamic-Charts/tree/master/v0_1/</li>
-<li><strong>Minified</strong> (persistent link): https://raw.github.com/mlarocca/Dynamic-Charts/master/v0<em>1/dynamic</em>chart.v0_1.min.js</li>
-<li><strong>Docs</strong>: http://mlarocca.github.com/Dynamic-Charts/v0_1/</li>
-</ul>
+	</body>
+</html>
