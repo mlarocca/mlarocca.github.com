@@ -2,7 +2,7 @@
 <html>
 	<head>
 	  <meta charset=utf-8 />
-	  <title>  Dynamic-Charts |  M+ Blog </title>
+	  <title>  PyCrawler |  M+ Blog </title>
 
 	<script type="text/javascript">
 
@@ -56,21 +56,21 @@
 		</div>
 		<div class="sixteen columns content">
 		<div id="post">
-	<h1>Dynamic-Charts</h1>
-	    <p>Dynamic-Charts is a high-level lib built on <em>D3js</em> to allow for easy and quick development of dynamically populated charts, especially thought to represent live, real-time data.</p>
+	<h1>PyCrawler</h1>
+	    <p>PyCrawler is a simple but functional crawler written in Python.</p>
 
-<p>Four charts are available now (a fifth is going to be added soon): 3 bar charts (a more basic one with bars&#39; size adjusting according to the size of the dataset plot and 2 more advanced ones for which the bar size is fixed and set on creation, and older data is discarded - in a settable ratio - to make room for new values), plus a &quot;wheel&quot; chart especially thought for plotting data literally &quot;on the clock&quot;.
-All of these charts support multidimensional data and can be fed with custom formatted data, by setting an appropriate custom &quot;interpreter&quot; function, so that, for example, JSON support is easily and automatically achieved.
-All of them, moreover, are higly customizable in their appearance: colors, backgrounds, labels size and color, axes (position, colors, visibility, size, number of nothces), titles and so on.</p>
+<p>It&#39;s a very humble crawler indeed, and I&#39;m not making any claim this is going to solve your crawling problems: it&#39;s just a spare time project, built in a couple of hours for fun and as a challenge. It only crawls static content, and ignores url fragments.</p>
 
-<table>
-  <tr height="146" valign="top">
-    <td align="center">Showcase #1<br><a href="http://bl.ocks.org/4339162"><img src="https://raw.github.com/mlarocca/Dynamic-Charts/master/thumbs/thumb.png" width="202"></a></td>
-    <td align="center">Showcase #2<br><a href="http://bl.ocks.org/4340039"><img src="https://raw.github.com/mlarocca/Dynamic-Charts/master/thumbs/thumb_2.png" width="202"></a></td>
-  </tr>
-</table>
+<p>Nonetheless, I tried to give it a general and robust structure and I think it is a good basis to build a decent crawler.
+At the time of writing, it has the following properties:
+* Breadth-first crawling
+* Parallel crawling (the number of crawlers running in different threadsin parallel is totally customizable at runtime)
+* Keeps track of the static resources referenced, and builds a map of the website crawled (starting from any page retrieved)
+* Crawls only pages within one single domain (determined by the starting page)
+* Can be set at runtime so that the number of pages crawled will be limited
+* Supports an elementary mechanism of polite crawling</p>
 
-<p>Please take a look at documentation <a href="http://mlarocca.github.com/Dynamic-Charts">here</a></p>
+<p><a href="http://mlarocca.github.com/PyCrawler/">Here</a> you can find complete documentation, while you can also take a look at its <a href="http://github.com/mlarocca/PyCrawler/">source code</a></p>
 
 </div>
 <hr class="separator">
@@ -79,10 +79,8 @@ All of them, moreover, are higly customizable in their appearance: colors, backg
 	    <h5>
 		<li><a href="../">Index</a></li>
 		 
-			<li><span>Prev: </span><span>19 Dec 2012</span>  <a href="/12-19-2012/javascript_OOE.html">Combining effective encapsulation and inheritance in JavaScript</a></li>
+			<li><span>Prev: </span><span>29 Dec 2012</span>  <a href="/12-29-2012/Dynamic-Charts.html">Dynamic-Charts</a></li>
 		 
-		 
-			<li><span>Next: </span><span>25 Jan 2013</span>  <a href="/01-25-2013/pycrawler.html">PyCrawler</a></li>
 		 
 	    </h5>
 	</ul>

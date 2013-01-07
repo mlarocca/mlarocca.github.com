@@ -5,6 +5,10 @@ body{
   border-top: 8px solid #2e5ac9;
 }
 
+.separator{
+	border-top: 8px solid #2e5ac9;
+}
+
 .footer{
   margin-top:2em;
   border-top: 8px solid #2e5ac9;
@@ -77,6 +81,22 @@ nav ul li a:hover,
 nav ul li a:focus {
   color: white; 
   background: #181863;}
+
+ul.bottom_nav li {
+  display: block;
+  margin-bottom: 10px;}
+ul.bottom_nav li a,
+ul.bottom_nav li a:visited,
+ul.bottom_nav li a:active  {
+  font-size: 14px;
+  color: #181863;
+  text-decoration: none;
+  font-weight: bold; }
+ul.bottom_nav li a:hover,
+ul.bottom_nav li a:focus {
+  color: white; 
+  background: #181863;}
+
 header h1 {
   font-size: 52px;
   line-height: 61px;

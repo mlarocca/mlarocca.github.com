@@ -3,6 +3,21 @@
 	<head>
 	  <meta charset=utf-8 />
 	  <title>  Home |  M+ Blog </title>
+
+	<script type="text/javascript">
+
+	  var _gaq = _gaq || [];
+	  _gaq.push(['_setAccount', 'UA-37178706-1']);
+	  _gaq.push(['_trackPageview']);
+
+	  (function() {
+	    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+	    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+	    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+	  })();
+
+	</script>
+
 	  <link rel="stylesheet" href="/css/styles.css" />
 	  <link rel="stylesheet" href="/css/skeleton/base.css">
 	  <link rel="stylesheet" href="/css/skeleton/skeleton.css">
@@ -13,12 +28,13 @@
 	</head>
 	<body>
 	<div class="container">
-		<div class="three columns sidebar">
+		<div class="four columns sidebar">
 			<nav>
 				<h4 id="logo">M+ Blog</h4>
 				<ul>
  					<li><a href="/">Home</a></li>
-					<!-- li><a href="/archive">Archive</a></li> -->
+					<li><a href="/archive.html">Archive</a></li>
+					<img src="/images/photo.jpg"/>
 					<h5>"When I grow up, I wanna be a javascript ninja."</h5>
 					&nbsp;
 					<h5>During the past 10 years I have been coding in most known programming languages, working all around Italy and Europe.</h5>
@@ -42,6 +58,25 @@
 		<div id="posts">
 
 	
+	  <h2><a href="/01-25-2013/pycrawler.html">PyCrawler</a></h2>
+	  25 Jan 2013
+	   <p>PyCrawler is a simple but functional crawler written in Python.</p>
+
+<p>It&#39;s a very humble crawler indeed, and I&#39;m not making any claim this is going to solve your crawling problems: it&#39;s just a spare time project, built in a couple of hours for fun and as a challenge. It only crawls static content, and ignores url fragments.</p>
+
+<p>Nonetheless, I tried to give it a general and robust structure and I think it is a good basis to build a decent crawler.
+At the time of writing, it has the following properties:
+* Breadth-first crawling
+* Parallel crawling (the number of crawlers running in different threadsin parallel is totally customizable at runtime)
+* Keeps track of the static resources referenced, and builds a map of the website crawled (starting from any page retrieved)
+* Crawls only pages within one single domain (determined by the starting page)
+* Can be set at runtime so that the number of pages crawled will be limited
+* Supports an elementary mechanism of polite crawling</p>
+
+<p><a href="http://mlarocca.github.com/PyCrawler/">Here</a> you can find complete documentation, while you can also take a look at its <a href="http://github.com/mlarocca/PyCrawler/">source code</a></p>
+
+
+	
 	  <h2><a href="/12-29-2012/Dynamic-Charts.html">Dynamic-Charts</a></h2>
 	  29 Dec 2012
 	   <p>Dynamic-Charts is a high-level lib built on <em>D3js</em> to allow for easy and quick development of dynamically populated charts, especially thought to represent live, real-time data.</p>
@@ -57,7 +92,7 @@ All of them, moreover, are higly customizable in their appearance: colors, backg
   </tr>
 </table>
 
-<p>Please take a look at documentation here: http://mlarocca.github.com/Dynamic-Charts</p>
+<p>Please take a look at documentation <a href="http://mlarocca.github.com/Dynamic-Charts">here</a></p>
 
 
 	
@@ -67,8 +102,9 @@ All of them, moreover, are higly customizable in their appearance: colors, backg
 
 	
 </div>
+<hr class="separator">
 <div id="post_links">
-    	<ul>
+    	<ul class="nav_bottom">
     	
     	</ul>
 </div>

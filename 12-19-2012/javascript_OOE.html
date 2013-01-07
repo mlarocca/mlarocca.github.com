@@ -3,6 +3,21 @@
 	<head>
 	  <meta charset=utf-8 />
 	  <title>  Combining effective encapsulation and inheritance in JavaScript |  M+ Blog </title>
+
+	<script type="text/javascript">
+
+	  var _gaq = _gaq || [];
+	  _gaq.push(['_setAccount', 'UA-37178706-1']);
+	  _gaq.push(['_trackPageview']);
+
+	  (function() {
+	    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+	    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+	    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+	  })();
+
+	</script>
+
 	  <link rel="stylesheet" href="/css/styles.css" />
 	  <link rel="stylesheet" href="/css/skeleton/base.css">
 	  <link rel="stylesheet" href="/css/skeleton/skeleton.css">
@@ -13,12 +28,13 @@
 	</head>
 	<body>
 	<div class="container">
-		<div class="three columns sidebar">
+		<div class="four columns sidebar">
 			<nav>
 				<h4 id="logo">M+ Blog</h4>
 				<ul>
  					<li><a href="/">Home</a></li>
-					<!-- li><a href="/archive">Archive</a></li> -->
+					<li><a href="/archive.html">Archive</a></li>
+					<img src="/images/photo.jpg"/>
 					<h5>"When I grow up, I wanna be a javascript ninja."</h5>
 					&nbsp;
 					<h5>During the past 10 years I have been coding in most known programming languages, working all around Italy and Europe.</h5>
@@ -58,7 +74,7 @@ In such a paradigm, Objects can communicate with other objects only if they have
 <li>By introduction (An object B to whom A has a reference introduces C to A)</li>
 </ol>
 
-<p>More on this topic here: http://www.youtube.com/watch?v=zKuFu19LgZA <em>(around 42:00)</em></p>
+<p>More on this topic <a href="http://www.youtube.com/watch?v=zKuFu19LgZA">here</a> <em>(around 42:00)</em></p>
 
 <p>Moving on: from objects to methods. Even if we (as Object C) have been introduced to A, we don&#39;t want A to be able to mess with our internal state: hence, we start using private attributes and methods.
 If we were to use prototypal inheritance, we could create C Objects using a factory-like method like the following one:</p>
@@ -173,7 +189,7 @@ But, thanks to ECMAscript 5, we might have a loophole: enumerable properties! We
                                 <span class="nx">enumerable</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
                                 <span class="nx">configurable</span><span class="o">:</span> <span class="kc">false</span>
                             <span class="p">});</span>
-    <span class="p">}</span>    
+    <span class="p">}</span>
 </code></pre></div>
 
 <p>One more thing we need to stress out: in order to have inheritance properly working, we need to handle original objects to the ones that are inheriting from them, but to avoid any possible encapsulation violation, the consumer should be able to access only their wrapped-in-proxy versions.
@@ -182,8 +198,8 @@ We therefore need to decouple this two aspects, and the perfect way to do so is 
 <p>How cool is that, right? But, you know, everything comes with a price, and this time the price is that you can&#39;t have any public attribute in your classes. Is that bad? Well, not really: you just need to define the appropriate getters and setters methods for this attributes, being careful to declare them as public methods, and you&#39;re good to go! Even better, this forces you to abide with the strongest version of encapsulation best practice: no attribute should be public, but should only be accessed trough getters and setters - call it Ruby style, if you prefer.</p>
 
 <p>Let&#39;s see a full example, to (hopefully!) help clarifying a bit.
-First we can add a shortcut to &quot;Object&quot; object to help with the creation of public and protected methods (please take a look at it in the source code here: https://github.com/mlarocca/); it&#39;s also good to have a few more utility functions, like one to get super version of an overridden method.
-With those tools in our belt, here is what we could obtain:        </p>
+First we can add a shortcut to &quot;Object&quot; object to help with the creation of public and protected methods (please take a look at it in the source code <a href="https://github.com/mlarocca/">here</a>); it&#39;s also good to have a few more utility functions, like one to get super version of an overridden method.
+With those tools in our belt, here is what we could obtain:</p>
 
 <div class="highlight"><pre><code class="javascript"><span class="kd">var</span> <span class="nx">Factory</span> <span class="o">=</span> <span class="p">(</span>
     <span class="kd">function</span><span class="p">(){</span>
@@ -289,15 +305,17 @@ With those tools in our belt, here is what we could obtain:        </p>
 Please feel free to drop a line if you have suggestions or you spotted a bug!</p>
 
 </div>
-
-<div id="post_links">
-<ul>
-	<li><a href="../">Index</a></li>
-	 
-	 
-		<li><span>29 Dec 2012</span>  <a href="/12-29-2012/Dynamic-Charts.html">Dynamic-Charts</a></li>
-	 
-</ul>
+<hr class="separator">
+<div id="post_links" class="sidebar">
+	<ul class="bottom_nav">
+	    <h5>
+		<li><a href="../">Index</a></li>
+		 
+		 
+			<li><span>Next: </span><span>29 Dec 2012</span>  <a href="/12-29-2012/Dynamic-Charts.html">Dynamic-Charts</a></li>
+		 
+	    </h5>
+	</ul>
 </div>
 
 
