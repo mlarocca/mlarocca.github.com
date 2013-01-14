@@ -82,18 +82,18 @@ nav ul li a:focus {
   color: white; 
   background: #181863;}
 
-ul li.separator {
+ul.bottom_nav li {
   display: block;
   margin-bottom: 10px;}
-ul li.separator a,
-ul li.separator a:visited,
-ul li.separator a:active  {
+ul.bottom_nav li a,
+ul.bottom_nav li a:visited,
+ul.bottom_nav li a:active  {
   font-size: 14px;
   color: #181863;
   text-decoration: none;
   font-weight: bold; }
-ul li.separator a:hover,
-ul li.separator a:focus {
+ul.bottom_nav li a:hover,
+ul.bottom_nav li a:focus {
   color: white; 
   background: #181863;}
 

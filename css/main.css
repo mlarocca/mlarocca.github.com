@@ -49,6 +49,9 @@ div.container {
 }
 
 
+ul{
+	list-style-type:circle;
+}
 
   /* Doc nav */
 nav {
