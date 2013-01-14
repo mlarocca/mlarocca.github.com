@@ -12,17 +12,17 @@ If by now you think I'm wandering off a bit... you are probably right! But I'll 
 It allows you to have a clean, MVC-compliant application, with all the power of declarative programming, templates and dependency injection.
 Creating a complex, structured application is fairly easy and quite enjoyable, so I'd definitely reccommend you to give it a try.
 
-### What's Tag Cloud?
+### What's [Tag Cloud Search + Translate](https://chrome.google.com/webstore/detail/tag-cloud-search-%20-transl/chffjcnjklkbamfkpmjmggckeglnbkio?hl=it&gl=IT)?
 
 Now let's go back to the extension.
 
 It consists of two parts:
 
-* The first part is an extension for the right-click context menu that activates whenever you righ-click on a selection (inside of a chrome tab, of course): it allows you to search the selected text on the most common websites you might want to search on (Google, Twitter, Facebook, Quora, Wikipedia), or to translate the selected text using Google Translate (by default, it sets translation from an automatically determined language to English). All of these options open the search in a new tab/window.
+* The first part adds an entry to your right-click context menu inside Chrome; the new entry is shown only when you have selected some text inside a page, and allows you to search the selected text on the most common websites you might want to search on (Google, Twitter, Facebook, Quora, Wikipedia), or to translate the selected text using Google Translate (by default, it sets translation from an automatically determined language to English). All of these options open the search in a new tab/window.
 
 * The second part, instead, offers a different, powerful alternative. While direct selection search (with literally 2 mouse clicks) is a very convenient plugin, this extension allows you to have a deeper knowledge of the page _before_ starting your search.
 
-By showing you a Tag Cloud with the 100 words with a length of at least 3 characters that are most often used in the currently dispalyed page, it provides a quick synthesis of every page you browse, in less than a second, and with only one click.
+By showing you a Tag Cloud with the 100 words that are most often used in the any page displayed in your Chrome browser, it provides a quick synthesis of every page you browse, in less than a second, and with only one click.
 
 Together with the Tag Cloud, actually right above it, a search bar is displayed: you can click on any Tag in the Cloud and add it to the search bar, then you can edit the search bar text, and finally search it with one of the search engines mentioned above.
 
@@ -58,3 +58,5 @@ The dynamics inside these objects are quite simple, but it is worth mentioning a
 So, since we need to have a way to compare and order elements added to FixedSizeMaxHeap, we just require (or in this case, pretend to, to avoid an excess of defensive programming) that elements added to this heap structure adheres to a "comparable" interface, that's not explicitely defined, but nonetheless is illustrated by an example, the propotype for Tag objects. The **makeTag** method is simply a constructor for Tag objects; we designed it more as a factory than as a constructor, in order to avoid actual JavaScript constructors (and therefore _new_ keyword, which is notoriously error-prone).
 
 * A _black list_ containing a good deal of the 100 most common English words is used to avoid having words like "the" or "and" filling the cloud. For the same reason, words with less than 3 characters are discarded as well.
+
+Please feel free to clone [my repository](goo.gl/Lrqiq) on github: you are free to use this code for any non-commercial project, and I'd really appreciate if you would like to contribute to it by sending pull requests.
