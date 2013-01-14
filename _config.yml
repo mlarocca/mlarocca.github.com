@@ -1,0 +1,5 @@
+---
+permalink: /:month-:day-:year/:title.html
+url: http://mlarocca.github.com
+markdown: redcarpet
+pygments: true

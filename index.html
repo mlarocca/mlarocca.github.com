@@ -1,116 +1,22 @@
-<!DOCTYPE html>
-<html>
-	<head>
-	  <meta charset=utf-8 />
-	  <title>  Home |  M+ Blog </title>
+---
+layout: default
+title: Home
+---
 
-	<script type="text/javascript">
+<div id="posts">
 
-	  var _gaq = _gaq || [];
-	  _gaq.push(['_setAccount', 'UA-37178706-1']);
-	  _gaq.push(['_trackPageview']);
+	{% for post in site.posts offset: 0 limit: 10 %}
+	  <h2><a href="{{ post.url }}">{{ post.title }}</a></h2>
+	  {{ post.date | date_to_string}}
+	   {{ post.content | truncatewords: 250  }}
 
-	  (function() {
-	    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-	    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-	    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-	  })();
-
-	</script>
-
-	  <link rel="stylesheet" href="/css/styles.css" />
-	  <link rel="stylesheet" href="/css/skeleton/base.css">
-	  <link rel="stylesheet" href="/css/skeleton/skeleton.css">
-	  <link rel="stylesheet" href="/css/skeleton/layout.css">
-	  <link rel="stylesheet" href="/css/main.css">
-	  <link rel="stylesheet" href="/css/docco.css">
-	  <link rel="stylesheet" href="/css/styles/googlecode.min.css">
-	</head>
-	<body>
-	<div class="container">
-		<div class="four columns sidebar">
-			<nav>
-				<h4 id="logo">M+ Blog</h4>
-				<ul>
- 					<li><a href="/">Home</a></li>
-					<li><a href="/archive.html">Archive</a></li>
-					<img src="/images/photo.jpg"/>
-					<h5>"When I grow up, I wanna be a javascript ninja."</h5>
-					&nbsp;
-					<h5>During the past 10 years I have been coding in most known programming languages, working all around Italy and Europe.</h5>
-					&nbsp;
-					<h5>Follow me:</h5>
-						<table>
-						    <tr>
-							<td><a href="https://twitter.com/marcellolarocca"><img src="/images/share_twitter.png"/></a></td>
-							<td><a href="https://plus.google.com/u/0/116060034086134836013/posts"><img src="/images/share_g+.png"/></a></td>
-							<td><a href="https://github.com/mlarocca"><img src="/images/share_github.png"/></a></td>
-							<td><a href="http://thound.org"><img src="/images/share_link.png"/></a></td>
-						    </tr>						
-						</table>
-					
-				</ul>
-			</nav>
-
-			&nbsp;
-		</div>
-		<div class="sixteen columns content">
-		<div id="posts">
-
-	
-	  <h2><a href="/01-05-2013/pycrawler.html">PyCrawler</a></h2>
-	  05 Jan 2013
-	   <p>PyCrawler is a simple but functional crawler written in Python.</p>
-
-<p>It&#39;s a very humble crawler indeed, and I&#39;m not making any claim this is going to solve your crawling problems: it&#39;s just a spare time project, built in a couple of hours for fun and as a challenge. It only crawls static content, and ignores url fragments.</p>
-
-<p>Nonetheless, I tried to give it a general and robust structure and I think it is a good basis to build a decent crawler.
-At the time of writing, it has the following properties:</p>
-<div class="highlight"><pre><code class="text">*    Breadth-first crawling
-*    Parallel crawling (the number of crawlers running in different threadsin parallel is totally customizable at runtime)
-*    Keeps track of the static resources referenced, and builds a map of the website crawled (starting from any page retrieved)
-*    Crawls only pages within one single domain (determined by the starting page)
-*    Can be set at runtime so that the number of pages crawled will be limited
-*    Supports an elementary mechanism of polite crawling
-</code></pre></div>
-<p><a href="http://mlarocca.github.com/PyCrawler/">Here</a> you can find complete documentation, while you can also take a look at its <a href="http://github.com/mlarocca/PyCrawler/">source code</a></p>
-
-
-	
-	  <h2><a href="/12-28-2012/Dynamic-Charts.html">Dynamic-Charts</a></h2>
-	  28 Dec 2012
-	   <p>Dynamic-Charts is a high-level lib built on <em>D3js</em> to allow for easy and quick development of dynamically populated charts, especially thought to represent live, real-time data.</p>
-
-<p>Four charts are available now (a fifth is going to be added soon): 3 bar charts (a more basic one with bars&#39; size adjusting according to the size of the dataset plot and 2 more advanced ones for which the bar size is fixed and set on creation, and older data is discarded - in a settable ratio - to make room for new values), plus a &quot;wheel&quot; chart especially thought for plotting data literally &quot;on the clock&quot;.
-All of these charts support multidimensional data and can be fed with custom formatted data, by setting an appropriate custom &quot;interpreter&quot; function, so that, for example, JSON support is easily and automatically achieved.
-All of them, moreover, are higly customizable in their appearance: colors, backgrounds, labels size and color, axes (position, colors, visibility, size, number of nothces), titles and so on.</p>
-
-<table>
-  <tr height="146" valign="top">
-    <td align="center">Showcase #1<br><a href="http://bl.ocks.org/4339162"><img src="https://raw.github.com/mlarocca/Dynamic-Charts/master/thumbs/thumb.png" width="202"></a></td>
-    <td align="center">Showcase #2<br><a href="http://bl.ocks.org/4340039"><img src="https://raw.github.com/mlarocca/Dynamic-Charts/master/thumbs/thumb_2.png" width="202"></a></td>
-  </tr>
-</table>
-
-<p>Please take a look at documentation <a href="http://mlarocca.github.com/Dynamic-Charts">here</a></p>
-
-
-	
-	  <h2><a href="/12-19-2012/javascript_OOE.html">Combining effective encapsulation and inheritance in JavaScript</a></h2>
-	  19 Dec 2012
-	   <p>While developing a plugin for the D3 graphic library, I found myself facing one of the most common conundrum for a JavaScript programmer: how on Earth is it possible to get a good compromise between encapsulation and extensibility?</p> <p>Don&#39;t get me wrong, there are many different known techniques to safely and effectively keep private attributes and methods really private (mostly involving closure and local vars), as well as there are many more to mimic inheritance, from pseudo-classical to prototypal or parasitic ones. A very good source of inspiration for all of these techniques can be found on <em>Douglas Crockford</em> web sites or, if you have a little bit more time, in some of his great videos on <em>YUITheather</em> (a must for any JS developer).</p> <p>But as far as I know there have been only a few attempts to cope with both problems at the same time: there is no &quot;protected&quot; encapsulation in JavaScript, and none of them looks particularly easy or satisfying to me. And that&#39;s a bummer, I mean, web development today is all about mash-ups, and every JS engineer at some point will have to exploit mash-ups, so she will be (well, at least he really SHOULD BE) necessarily concerned about the methods that his objects are going to expose to consumers.</p> <p>The most common solution starts, or at least it should, from embracing an Object Capability System. In such a paradigm, Objects can communicate with other objects only if they have a reference to them (as usual),...
-
-	
+	{% endfor %}
 </div>
 <hr class="separator">
 <div id="post_links">
     	<ul class="nav_bottom">
-    	
+    	{% for post in site.posts offset: 10 %}
+    		<li><span>{{ post.date | date_to_string }}</span>  <a href="{{ post.url }}">{{ post.title }}</a></li>
+    		{% endfor %}
     	</ul>
 </div>
-
-		</div>
-	</div>
-
-	</body>
-</html>

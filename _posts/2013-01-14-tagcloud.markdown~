@@ -1,0 +1,59 @@
+---
+layout: post
+title: Tag Cloud Extension for Google Chrome
+---
+
+To be honest, I have been delaying this for a while. It's been at least a couple of months since I had this idea to work on a tag cloud extension for chrome, but I was overwhelmed by my other projects, and so I kept neglecting it.
+
+To be even more honest, I was craving for some time to work on it, when finally, yesterday, taking advantage of a Sunday, I found a loophole that allowed me to do it, I started exulting in a very moderate way... basically [like this](https://www.youtube.com/watch?v=z-6bc_IvB5M).
+The key was AngularJS since I have been learning it for a while, lately, it looked like the perfect chance to put what I had learnt in practice, so I used it as a leverage (against myself and my schedule).
+
+If by now you think I'm wandering off a bit... you are probably right! But I'll get to the grain in a minute; first, however, I'd like to share my impressions on Angular, because it amazed me, really.
+It allows you to have a clean, MVC structured application, with all the power of declarative programming, templates and dependency injection.
+Creating a complex, structured application is fairly easy and quite enjoyable, so I'd definitely reccommend you to give it a try.
+
+### What's Tag Cloud?
+
+Now let's go back to the extension.
+
+It consists of two parts:
+
+* The first part is an extension for the right-click context menu that activates whenever you righ-click on a selection (inside of a chrome tab, of course): it allows you to search the selected text on the most common websites you might want to search on (Google, Twitter, Facebook, Quora, Wikipedia), or to translate the selected text using Google Translate (by default, it sets translation from an automatically determined language to English). All of these options open the search in a new tab/window.
+
+* The second part, instead, offers a different, powerful alternative. While direct selection search (with literally 2 mouse clicks) is a very convenient plugin, this extension allows you to have a deeper knowledge of the page _before_ starting your search.
+
+By showing you a Tag Cloud with the 100 words with a length of at least 3 characters that are most often used in the currently dispalyed page, it provides a quick synthesis of every page you browse, in less than a second, and with only one click.
+
+Together with the Tag Cloud, actually right above it, a search bar is displayed: you can click on any Tag in the Cloud and add it to the search bar, then you can edit the search bar text, and finally search it with one of the search engines mentioned above.
+
+
+### App Structure
+
+So, for this project I have been using [AngularJS](http://angularjs.org/). I know, I know, I have already said it too many times, but... I can't help it!
+No, seriously, it is the core of the projet, so I couldn't avoid mentioning it here.
+
+There are actually a few more amazing (really amazing!) libraries I have been using to pull it all together:
+
+* [jQuery](http://jquery.com/)
+
+* [D3js](http://d3js.org/)
+
+* [Word Cloud](https://github.com/jasondavies/d3-cloud)
+
+A thank you to the teams and people behind them it's the least we can do, cause they allow us to build very cool app with far smaller effort.
+
+As for TagCloudChromeEx itself, I tried to abide to the MVC pattern, following Angular guidelines, so I created a model (_content.js_), a controller (PageController, inside _popup.js_) and a view (__tagCloudRender__ service, also inside _popup.js_).
+
+I decided to use services (another cool feature allowed by angular) to have an even greater decoupling: there are 2 of them, one, as mentioned above, is used to render the view, the other one, __tagCloudService__, is used to connect to the model: by changing it, it should be possible to have the extension working for other browsers as well, with virtually no changes to the rest of the code.
+
+The dynamics inside these objects are quite simple, but it is worth mentioning a couple of choices and a few helper classes used in _content.js_: 
+
+* To enforce decoupling and keep all the scope related actions inside the controller and hidden from __tagCloudService__, a callback is passed to __tagCloudService__ to be executed with the result provided by the model to the service, after being called.
+
+* To avoid repetition or missbehave on the service side, the callback uses the call-once pattern, so that it won't be callable more than once.
+
+* **FixedSizeMaxHeap** is a data structure in between an array and an heap. It is actually both: since the goal is to preserve the _k_ largest elements inserted into the data structure, and to do it efficiently, the best solution is to have the array holding the elements structured as a minHeap: although counterintuitive, it supports our need for a quick way to access the smallest element of the array (in constant time) so that, when the array ha already reached its capacity, the new elements can be quickly compared to the minimum in the queue, and if smaller, directly discarted; moreover, as an heap, it support insertion in time at most logarithmic *in the capacity of the heap*: this means that even if we take a look at a million elements, or more, being the capacity constant, the asymptotic time required for a single insertion will be the logarithm of a constant (and hence constant itself), so the total time to find the _k_ largest elements from a list of _n_ elements will be _O(n)_. And that becomes a very important save as __n__ grows over 2^32.
+	
+* **makeTag**. As widely known, JavaScript doesn't support interfaces (although you can work something out with prototypes) nor types and therefore type constraints (not to mention type Variance and Covariance - but that's for another post about Scala awesomness!)
+So, since we need to have a way to compare and order elements added to FixedSizeMaxHeap, we just require (or in this case, pretend to, to avoid an excess of defensive programming) that elements added to this heap structure adheres to a "comparable" interface, that's not explicitely defined, but nonetheless is illustrated by an example, the propotype for Tag objects. **makeTag** method is simply a constructor for Tag objects; we designed it more as a factory than as a constructor, in order to avoid actual JavaScript constructors (and therefore _new_ keyword, which is notoriously error-prone).
+
