@@ -6,10 +6,10 @@ title: Tag Cloud Extension for Google Chrome
 To be honest, I have been delaying this for a while. It's been at least a couple of months since I had this idea to work on a tag cloud extension for chrome, but I was overwhelmed by my other projects, and so I kept neglecting it.
 
 To be even more honest, I was craving for some time to work on it, when finally, yesterday, taking advantage of a Sunday, I found a loophole that allowed me to do it, I started exulting in a very moderate way... basically [like this](https://www.youtube.com/watch?v=z-6bc_IvB5M).
-The key was AngularJS since I have been learning it for a while, lately, it looked like the perfect chance to put what I had learnt in practice, so I used it as a leverage (against myself and my schedule).
+The key was AngularJS since I have been experimenting with it for a while, lately, and so it looked like the perfect chance to put what I had learned in practice.
 
 If by now you think I'm wandering off a bit... you are probably right! But I'll get to the grain in a minute; first, however, I'd like to share my impressions on Angular, because it amazed me, really.
-It allows you to have a clean, MVC structured application, with all the power of declarative programming, templates and dependency injection.
+It allows you to have a clean, MVC-compliant application, with all the power of declarative programming, templates and dependency injection.
 Creating a complex, structured application is fairly easy and quite enjoyable, so I'd definitely reccommend you to give it a try.
 
 ### What's Tag Cloud?
@@ -57,3 +57,4 @@ The dynamics inside these objects are quite simple, but it is worth mentioning a
 * **makeTag**. As widely known, JavaScript doesn't support interfaces (although you can work something out with prototypes) nor types and therefore type constraints (not to mention type Variance and Covariance - but that's for another post about Scala awesomness!)
 So, since we need to have a way to compare and order elements added to FixedSizeMaxHeap, we just require (or in this case, pretend to, to avoid an excess of defensive programming) that elements added to this heap structure adheres to a "comparable" interface, that's not explicitely defined, but nonetheless is illustrated by an example, the propotype for Tag objects. The **makeTag** method is simply a constructor for Tag objects; we designed it more as a factory than as a constructor, in order to avoid actual JavaScript constructors (and therefore _new_ keyword, which is notoriously error-prone).
 
+* A _black list_ containing a good deal of the 100 most common English words is used to avoid having words like "the" or "and" filling the cloud. For the same reason, words with less than 3 characters are discarded as well.
