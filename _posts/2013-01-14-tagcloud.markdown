@@ -59,4 +59,4 @@ So, since we need to have a way to compare and order elements added to FixedSize
 
 * A _black list_ containing a good deal of the 100 most common English words is used to avoid having words like "the" or "and" filling the cloud. For the same reason, words with less than 3 characters are discarded as well.
 
-Please feel free to clone [my repository](goo.gl/Lrqiq) on github: you are free to use this code for any non-commercial project, and I'd really appreciate if you would like to contribute to it by sending pull requests.
+Please feel free to clone [my repository](http://goo.gl/Lrqiq) on github: you are free to use this code for any non-commercial project, and I'd really appreciate if you would like to contribute to it by sending pull requests.

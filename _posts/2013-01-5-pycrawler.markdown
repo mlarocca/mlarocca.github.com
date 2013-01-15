@@ -11,20 +11,15 @@ Nonetheless, I tried to give it a general and robust structure and I think it is
 At the time of writing, it has the following properties:
 
 *    Breadth-first crawling
-
 *    Parallel crawling (the number of crawlers running in different threadsin parallel is totally customizable at runtime)
-
 *    Keeps track of the static resources referenced, and builds a map of the website crawled (starting from any page retrieved)
-
 *    Crawls only pages within one single domain (determined by the starting page)
-
 *    Can be set at runtime so that the number of pages crawled will be limited
-
 *    Supports an elementary mechanism of polite crawling
 
 [Here](http://mlarocca.github.com/PyCrawler/) you can find complete documentation, while you can also take a look at its [source code](http://github.com/mlarocca/PyCrawler/)
 
-## Update: 2013/01/13
+### Update: 2013/01/13
 
 
 I introduced the concept of depth in the crawling process, allowing to specify a predefined maximum depth for the web pages to crawl, in alternative or together with a limit for the number of pages retrieved. Consequently, the interface of start_crawling method has slightly changed (See documentation).
