@@ -35,9 +35,8 @@ No, seriously, it is the core of the projet, so I couldn't avoid mentioning it h
 There are actually a few more amazing (really amazing!) libraries I have been using to pull it all together:
 
 * [jQuery](http://jquery.com/)
-
 * [D3js](http://d3js.org/)
-
+* [Twitter Bootstrap](http://twitter.github.com/bootstrap/index.html)
 * [Word Cloud](https://github.com/jasondavies/d3-cloud)
 
 A thank you to the teams and people behind them it's the least we can do, cause they allow us to build very cool app with far smaller effort.
