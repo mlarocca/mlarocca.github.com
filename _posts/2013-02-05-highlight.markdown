@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Highlight extension for Jquery
+title: Highlight plugin for JQuery
 ---
 
 When developing the [Tag Cloud Extension](http://mlarocca.github.com/01-14-2013/tagcloud.html) for Chrome I came across the idea to add a nice feature: custom highlighting for the tags, so that they could be easily spotted in their original context.
