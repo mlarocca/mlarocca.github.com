@@ -2,7 +2,7 @@
 layout: post
 title: Tag Cloud Extension for Google Chrome
 ---
-
+### Updated on January the 20th, 2013: Version 1.5.0
 ### Updated on February the 5th, 2013: Version 2.0.4 - Scroll to the end of the page!
 
 To be honest, I have been delaying this for a while. It's been at least a couple of months since I had this idea to work on a tag cloud extension for chrome, but I was overwhelmed by my other projects, and so I kept neglecting it.
@@ -85,7 +85,7 @@ New features added:
 * You can now <b>shift+click</b> on a tag and highlight all the occurrences of that word in the original page; to remove highlighting for the tag, just <b>alt+click</b> on it;
 * Highlighting for the page lasts for the whole "session": you can close the popup window, browse other tabs, and highlighting and selections will still be kept, at least until you close or reload the current one.
 
-VERSION 2.0.2
+#### VERSION 2.0.2
 ================
 
 * Page scraping and Tag generation algorithm improved;

@@ -4,12 +4,14 @@ title: Highlight plugin for jQuery
 ---
 
 When developing the [Tag Cloud Extension](http://mlarocca.github.com/01-14-2013/tagcloud.html) for Chrome I came across the idea to add a nice feature: custom highlighting for the tags, so that they could be easily spotted in their original context.
-It sounded a very useful featue to have, so I decided to actually implement it. As I soon realized, the challenge was quite more complex than one could think, hence, before trying to reinvent the wheel, I decided to look for a library or even better a jQuery plugin that would implement text highlighting in a HTML page.
+It sounded a very useful feature to have, so I decided to actually implement it. Working on the problem I realized very early that the challenge was quite more complex than one could think, hence, in an effort to avoid wasting a lot of energy to reinvent the wheel (being a _huuuuge_ fan of modularization and software reuse ^_^), I decided to look for a library  - or even better a jQuery plugin - that provided text highlighting functionalities in a HTML document.
 
 I found several matching results, and I spent a few days evaluating them and trying them out, but all of those libs were largely unsatisfactory and had buggy implementations.
 When I was about to give up, I finally stumbled upon the highlight.js jQuery plugin by [Johann Burkard](http://johannburkard.de/blog/programming/javascript/highlight-javascript-text-higlighting-jquery-plugin.html):
 Finally an excellent, working solution, the best I could ever find and even desire.
-This one the only one perfectly working solution I could find, an impressive job, really. The funny thing is, I later realized it was too part of a Tag Cloud lib, [DynaCloud](http://johannburkard.de/blog/programming/javascript/dynacloud-a-dynamic-javascript-tag-keyword-cloud-with-jquery.html).
+This one the only one perfectly working solution I could find, an impressive job, really.
+
+The funny thing is, I later realized it was too part of a Tag Cloud lib, [DynaCloud](http://johannburkard.de/blog/programming/javascript/dynacloud-a-dynamic-javascript-tag-keyword-cloud-with-jquery.html).
 
 Nonetheless, even this nice plugin lacked a few features I needed to use it in my extension project, but it represented a very good basis to start with, so I decided to extend it, and here it is what I came up with.
 
