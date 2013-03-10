@@ -1,17 +1,32 @@
 ---
 layout: post
-title: Highlight plugin for JQuery
+title: Highlight plugin for jQuery
 ---
 
 When developing the [Tag Cloud Extension](http://mlarocca.github.com/01-14-2013/tagcloud.html) for Chrome I came across the idea to add a nice feature: custom highlighting for the tags, so that they could be easily spotted in their original context.
 It sounded a very useful featue to have, so I decided to actually implement it. As I soon realized, the challenge was quite more complex than one could think, hence, before trying to reinvent the wheel, I decided to look for a library or even better a jQuery plugin that would implement text highlighting in a HTML page.
 
-I found several proposal, and I spent a few days evaluating them and trying them out, but all of them were largely unsatisfactory and buggy implementations.
+I found several matching results, and I spent a few days evaluating them and trying them out, but all of those libs were largely unsatisfactory and had buggy implementations.
 When I was about to give up, I finally stumbled upon the highlight.js jQuery plugin by [Johann Burkard](http://johannburkard.de/blog/programming/javascript/highlight-javascript-text-higlighting-jquery-plugin.html):
 Finally an excellent, working solution, the best I could ever find and even desire.
 This one the only one perfectly working solution I could find, an impressive job, really. The funny thing is, I later realized it was too part of a Tag Cloud lib, [DynaCloud](http://johannburkard.de/blog/programming/javascript/dynacloud-a-dynamic-javascript-tag-keyword-cloud-with-jquery.html).
 
 Nonetheless, even this nice plugin lacked a few features I needed to use it in my extension project, but it represented a very good basis to start with, so I decided to extend it, and here it is what I came up with.
+
+Besides a little refactoring of the code, the main differences are:
+
+1. The text to highlight can be expressed as a pattern, or better its string representation (as in "\\w*" or "\\d+", for example);
+
+2. It can be chosen to highlight only whole words exactly matching the pattern;
+
+3. The CSS class assigned to the highlighted text is specified in each and every call, and thus different styles can be applied to different highlighted keyword or patterns in each page;
+
+4. _removeHighlight_ takes the name of the class associated with the highlighting to remove as a parameter, so that, if more than one category (i.e. style) has been used, removal can be limited to single categories.
+
+5. Highlighted text can be associated with up to two different classes of highlighting: our reccomendation is to use a general class not associated with css rules (parameter _highlightClassName_ ) to identify highlighting-related span tags in the document, and a second specific class (parameter _specificClassName_ ) to actually style the individual patterns highlighted (as said above, each pattern can be styled differently this way). This solution, together with the flexibilty of our version of removeHighlight, allow to remove all highlighting with one single call ( _removeHighlight(highlightClassName)_ ) or single highlight categories individually.
+
+
+Of course the credit goes mostly to Johann for the great work he did on its version.
 
 ```javascript
 /**
@@ -128,18 +143,3 @@ jQuery.fn.getText = function() {
     }
 }; 
 ```
-
-Besides a little refactoring of the code, the main differences are:
-
-1. The text to highlight can be expressed as a pattern, or better its string representation (as in "\\w*" or "\\d+", for example);
-
-2. It can be chosen to highlight only whole words exactly matching the pattern;
-
-3. The CSS class assigned to the highlighted text is specified in each and every call, and thus different styles can be applied to different highlighted keyword or patterns in each page;
-
-4. _removeHighlight_ takes the name of the class associated with the highlighting to remove as a parameter, so that, if more than one category (i.e. style) has been used, removal can be limited to single categories.
-
-5. Highlighted text can be associated with up to two different classes of highlighting: our reccomendation is to use a general class not associated with css rules (parameter _highlightClassName_ ) to identify highlighting-related span tags in the document, and a second specific class (parameter _specificClassName_ ) to actually style the individual patterns highlighted (as said above, each pattern can be styled differently this way). This solution, together with the flexibilty of our version of removeHighlight, allow to remove all highlighting with one single call ( _removeHighlight(highlightClassName)_ ) or single highlight categories individually.
-
-
-Of course the credit goes mostly to Johann for the great work he did on its version.
