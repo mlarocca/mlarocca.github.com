@@ -2,23 +2,23 @@
 layout: post
 title: Tag Cloud Extension for Google Chrome
 ---
-### Updated on January the 20th, 2013: Version 1.5.0
-### Updated on February the 5th, 2013: Version 2.0.4 - Scroll to the end of the page!
+### Last updated on March the 11th, 2013: Version 2.0.4
+(Scroll to the end of the page!)
 
 To be honest, I have been delaying this for a while. It's been at least a couple of months since I had this idea to work on a tag cloud extension for chrome, but I was overwhelmed by my other projects, and so I kept neglecting it.
 
-To be even more honest, I was craving for some time to work on it, when finally, yesterday, taking advantage of a Sunday, I found a loophole that allowed me to do it, I started exulting in a very moderate way... basically [like this](https://www.youtube.com/watch?v=z-6bc_IvB5M).
+To be even more honest, I was craving for some time to work on it, when finally, yesterday, taking advantage of a (very cold) Sunday, I found a loophole that allowed me to do it, I started exulting in a very moderate way... basically [like this](https://www.youtube.com/watch?v=z-6bc_IvB5M).
 The key was AngularJS since I have been experimenting with it for a while, lately, and so it looked like the perfect chance to put what I had learned in practice.
 
 If by now you think I'm wandering off a bit... you are probably right! But I'll get to the grain in a minute; first, however, I'd like to share my impressions on Angular, because it amazed me, really.
 It allows you to have a clean, MVC-compliant application, with all the power of declarative programming, templates and dependency injection.
-Creating a complex, structured application is fairly easy and quite enjoyable, so I'd definitely reccommend you to give it a try.
+Creating a complex, structured application is fairly easy and quite enjoyable, so I'd definitely recommend you to give it a try.
 
 ### What's [Tag Cloud Search + Translate](https://chrome.google.com/webstore/detail/tag-cloud-search-%20-transl/chffjcnjklkbamfkpmjmggckeglnbkio?hl=it&gl=IT)?
 
 Now let's go back to the extension.
 
-It consists of two parts:
+It mainly consists of two complementary parts:
 
 * The first part adds an entry to your right-click context menu inside Chrome; the new entry is shown only when you have selected some text inside a page, and allows you to search the selected text on the most common websites you might want to search on (Google, Twitter, Facebook, Quora, Wikipedia), or to translate the selected text using Google Translate (by default, it sets translation from an automatically determined language to English). All of these options open the search in a new tab/window.
 
@@ -90,3 +90,10 @@ New features added:
 
 * Page scraping and Tag generation algorithm improved;
 * Help page available from the extension itself.
+
+
+VERSION 2.0.4
+================
+
+* The color used for highlighting can be chosen from the 'Options' page available in the chrome extensions tab.
+* Help page completed.

@@ -25,7 +25,7 @@ Besides a little refactoring of the code, the main differences are:
 
 4. _removeHighlight_ takes the name of the class associated with the highlighting to remove as a parameter, so that, if more than one category (i.e. style) has been used, removal can be limited to single categories.
 
-5. Highlighted text can be associated with up to two different classes of highlighting: our reccomendation is to use a general class not associated with css rules (parameter _highlightClassName_ ) to identify highlighting-related span tags in the document, and a second specific class (parameter _specificClassName_ ) to actually style the individual patterns highlighted (as said above, each pattern can be styled differently this way). This solution, together with the flexibilty of our version of removeHighlight, allow to remove all highlighting with one single call ( _removeHighlight(highlightClassName)_ ) or single highlight categories individually.
+5. Highlighted text can be associated with up to two different classes of highlighting: our recommendation is to use a general class not associated with css rules (parameter _highlightClassName_ ) to identify highlighting-related span tags in the document, and a second specific class (parameter _specificClassName_ ) to actually style the individual patterns highlighted (as said above, each pattern can be styled differently this way). This solution, together with the flexibilty of our version of removeHighlight, allow to remove all highlighting with one single call ( _removeHighlight(highlightClassName)_ ) or single highlight categories individually.
 
 
 Of course the credit goes mostly to Johann for the great work he did on its version.
