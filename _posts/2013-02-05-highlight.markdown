@@ -3,7 +3,7 @@ layout: post
 title: Highlight plugin for jQuery
 ---
 
-When developing the [Tag Cloud Extension](http://mlarocca.github.com/01-14-2013/tagcloud.html) for Chrome I came across the idea to add a nice feature: custom highlighting for the tags, so that they could be easily spotted in their original context.
+While developing the [Tag Cloud Extension](http://mlarocca.github.com/01-14-2013/tagcloud.html) for Chrome I came across the idea to add a nice feature: custom highlighting for the tags, so that they could be easily spotted in their original context.
 It sounded a very useful feature to have, so I decided to actually implement it. Working on the problem I realized very early that the challenge was quite more complex than one could think, hence, in an effort to avoid wasting a lot of energy to reinvent the wheel (being a _huuuuge_ fan of modularization and software reuse ^_^), I decided to look for a library  - or even better a jQuery plugin - that provided text highlighting functionalities in a HTML document.
 
 I found several matching results, and I spent a few days evaluating them and trying them out, but all of those libs were largely unsatisfactory and had buggy implementations.
