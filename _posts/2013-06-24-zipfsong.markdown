@@ -77,6 +77,12 @@ But I believe these are the key points, the real lesson to learn:
 
   - **You must be very very careful when moving from theory to implementation!**
 
-  - Do not make assumptions, do not take anything for granted. If performance is critical, test, tune, and test again, even against naive but simpler solutions.
+  - **Do not make assumptions**, do not take anything for granted. If performance is critical, test, tune, and test again, even against naive but simpler solutions.
 
-  - Carefully evaluate the size of your inputs: for smaller values, simple solution, with small "constants" factor in their _big-Oh_, will probably outperform complicated algorithms; for very large instances, like millions of billions of elements, you'll probably need to care about asymptotic behaviour.
+  - **Carefully evaluate the size of your inputs**: for smaller values, simple solution, with small "constants" factor in their _big-Oh_, will probably outperform complicated algorithms; for very large instances, like millions of billions of elements, you'll probably need to care about asymptotic behaviour.
+
+  - **STAY AWAY FROM PYTHON CLASSES**!!! In fact, I rewrote the lib mentioned above in the form of a package supporting separate sets of functions for min and max heaps. The result is less elegant and requires the user to be careful and thoughtful, since there is no encapsulation nor controls. But it is much faster than the class version!
+  
+  Moreover, "we are all among adults" is sort of Python motto, right? Still, mistakenly using the min-heap version of put on a max-heap produces unpredictable misbehaviour! To restrict the possibility of errors, a helper function to create heap is provided, and only the pseudo object returned (or structures alike them) can be passed to the package functions. 
+
+  **You can find it [here](https://github.com/mlarocca/Algorithms/tree/master/dway_heap)**, together with its unit-testing module.

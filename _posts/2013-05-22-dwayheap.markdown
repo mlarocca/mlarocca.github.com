@@ -13,6 +13,8 @@ But, however, the implementation of Fibonacci's heap is complicated enough to ma
 To find a compromise between this two aspects, we could either resort to D-way heaps, or to Pairing heaps. Forget about the latter soon: just remember they are simple and powerful data structures that haven't been fully understood yet.
 For the moment, instead, [here](https://github.com/mlarocca/Algorithms) you can find implementations of d-way heaps in Python and Java.
 
+**EDIT The Python version using classes proved itself [dramatically slow](http://mlarocca.github.io/06-24-2013/zipfsong.html) so I developed a faster package, which doesn't use classes [here](https://github.com/mlarocca/Algorithms/tree/master/dway_heap)**
+
 With d-way heaps, operations running times goes from log\_2(n) to log\_d(n); in practice, usually 4-way heaps are a very good compromise.
 The idea behind them is very simple: why would we stop at 2 children per node? Unlike binary trees, there is no order associated with children, so no reason to limit their number.
 
