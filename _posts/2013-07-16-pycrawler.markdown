@@ -3,7 +3,7 @@ layout: post
 title: PyCrawler updated to v.1.3
 ---
 
-PyCrawler is a simple but functional crawler written in Python, [here] you can read the original post about it with all its features listed.
+PyCrawler is a simple but functional crawler written in Python, [here](http://mlarocca.github.io/01-05-2013/pycrawler.html) you can read the original post about it with all its features listed.
 
 This update deals with duplicate pages: it is not uncommon that 2 different URIs lead to the same page, especially if for any reason the URLs used maintain any state info or non influential parameters (for example, without login, all the links may redirect to the home page of a web site, but that is not noticeable by looking at the URL only).
 
