@@ -17,7 +17,7 @@ At the time of writing, it has the following properties:
 *    Can be set at runtime so that the number of pages crawled will be limited
 *    Supports an elementary mechanism of polite crawling
 
-[Here](http://mlarocca.github.com/PyCrawler/) you can find complete documentation, while you can also take a look at its [source code](http://github.com/mlarocca/PyCrawler/)
+[Here](http://mlarocca.github.io/PyCrawler/) you can find complete documentation, while you can also take a look at its [source code](http://github.com/mlarocca/PyCrawler/)
 
 ### Update: 2013/01/13
 
