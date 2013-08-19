@@ -1,9 +1,8 @@
 ---
 layout: post
-title: V-rawler, a visual extension for [PyCrawler](http://mlarocca.github.io/07-16-2013/pycrawler.html)
----
+title: V-rawler, a visual extension for PyCrawler.
 
-#What is it?
+##What is it?
 
 ![Vrawler](../images/vrawler.jpg)
 
@@ -13,7 +12,7 @@ It works with almost every single website on the net, although you might find so
 
 You can clone, fork or just take a look at its source code on its [github repository](https://github.com/mlarocca/V-rawler).
 
-#Guide
+##Guide
 
 To get started, you have 4 ways:
 
@@ -33,7 +32,7 @@ Once the embedding algorithm has or has been stopped, you can freely drag vertic
 
 If you use the left mouse button for dragging, the optimization algorithm will start again, with a storter cycle. If you, instead, use the right mouse button, the optimization algorithm will not be triggered.
 
-#Why + how
+##Why + how
 
 PyCrawler is a simple breadth-first, multi-thread crawler that creates a map of a single domain, returning its description as a json object.
 It was born as an interview challenge, and has undergone a constant tuning: it works pretty smoothly today, collecting many useful information for each website, but... if your site has more than half a dozen pages, well it becomes pretty complicated to make yourself a quick overall impression of it by looking at the json returned.
