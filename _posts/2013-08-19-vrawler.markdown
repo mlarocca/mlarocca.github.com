@@ -1,6 +1,7 @@
 ---
 layout: post
-title: V-rawler, a visual extension for PyCrawler.
+title: V-rawler, a visual extension for PyCrawler
+---
 
 ##What is it?
 
