@@ -21,7 +21,7 @@ To get started, you have 4 ways:
 
 2. On the same page, after closing the dialog mentioned above, you can insert the URL in the field on the right of the navigation bar, and then hit the "Crawl" button;
 
-3. A REST interface is exposed: to crawl [google.com](google.com), for example, just visit [http://v-rawler.appspot.com/visual/google.com](http://v-rawler.appspot.com/visual/google.com); **Please note that the URL used for the REST interface must NOT contain the protocol segment, i.e.: __http://v-rawler.appspot.com/visual/google.com__ works, but __http://v-rawler.appspot.com/visual/http://google.com__ wouldn't;
+3. A REST interface is exposed: to crawl [google.com](google.com), for example, just visit [http://v-rawler.appspot.com/visual/google.com](http://v-rawler.appspot.com/visual/google.com); **Please note that the URL used for the REST interface must NOT contain the protocol segment, i.e.: *http://v-rawler.appspot.com/visual/google.com* works, but *http://v-rawler.appspot.com/visual/http://google.com* wouldn't;**
 
 4. The REST interface allows you to get the json data back from the crawler, and then do whatever you want with it; for the example above, just visit [http://v-rawler.appspot.com/json/google.com](http://v-rawler.appspot.com/json/google.com)
 
