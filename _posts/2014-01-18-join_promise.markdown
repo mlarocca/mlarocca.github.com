@@ -16,7 +16,7 @@ However, as hard as it can be to believe, I want to talk about what I think it i
 
 ###Promises
 
-Let's take a little step back, first, to briefly describe what promises and noSql DBs are. In particular, I'm going to refer to jQuery implementation of the [Promise/A](http://wiki.commonjs.org/wiki/Promises/A) proposal, and Google App Engine datastore.
+Let's take a step back, first, to briefly describe what promises and noSql DBs are. In particular, I'm going to refer to jQuery implementation of the [Promise/A](http://wiki.commonjs.org/wiki/Promises/A) proposal, and Google App Engine datastore.
 
 Simply stated, a promise represents a value that is not yet known, and a future (deferred) represents work that is not yet finished.
 A promise is basically a placeholder for a result which is initially unknown, and can be either be resolved or fail; they are a way to deal with asynchronous code flow, as for example _ajax calls_, animations, and so on; you could use callbacks to deal with async programming, but promises allows you a cleaner code style (which in turn means it's going to be easier to maintain your code) and provides a much easier way to combine different steps in the asynch workflow.
@@ -113,6 +113,7 @@ Where could we improve this? Well, for example, we notice that we don't need to 
 1. Start the first query
 2. Start the second query
 3. continue execution of next statements
+
 A. As soon as the first query returns, preProcess data1
 B. As soon as the second query returns, preProcess data2
 C. When both calls to preProcess returns their result, call mergeData
@@ -250,3 +251,120 @@ So if you need to perform joins often and if it's a critical operation for your 
 
 Now, here it is a real-life example of simulated left join query in JavaScript, retrieving JSON data from a DB through ajax calls; this example uses promises a bit more extensively because takes authentication into account as well.
 
+{% highlight javascript %}
+function leftJoin (callback, authUrl, queryUrl, leftTableQuery, rightTableQuery, leftTableJoinField, rightTableJoinField, joinFields, authParameters, adapter) {
+    "use strict";
+    
+    if (typeof callback !== "function" || callback.length < 1) {
+        throw new TypeError("A callback function taking at least 1 argument (the json retrieved) is needed");
+    }
+    if (typeof rightTableQuery !== "string" || typeof leftTableQuery !== "string"
+        || typeof leftTableJoinField !== "string" || typeof rightTableJoinField !== "string"
+        || !$.isArray(joinFields)
+        || typeof queryUrl !== "string" || typeof authUrl !== "string"){
+                
+                throw new TypeError("Invalid query parameters");
+    }                            
+
+    var leftTableProcessDeferred = $.Deferred(),
+        rightTableProcessDeferred = $.Deferred(),
+
+        onAuthToken = function (data) {
+          var retrievalProcessDeferred = $.Deferred();
+          //First query
+          $.ajax({
+              method: 'POST',
+              url: queryUrl,
+              data: JSON.stringify({'query' : rightTableQuery}),
+              processData: false,
+              headers: {'Content-Type': 'application/json', 'Authorization': 'Bearer ' + data.access_token}                            
+          }).done(onRightTableQuerySuccess)
+            .fail(function (jqXHR, textStatus) {
+                    retrievalProcessDeferred.reject(jqXHR);
+            });
+
+          //Second query
+          $.ajax({
+              method: 'POST',
+              url: queryUrl,
+              data: JSON.stringify({'query': leftTableQuery}),
+              processData: false,
+              headers: {'Content-Type': 'application/json', 'Authorization': 'Bearer ' + data.access_token}                            
+          }).done(onLeftTableQuerySuccess)
+            .fail(function (jqXHR, textStatus) {
+                    retrievalProcessDeferred.reject(jqXHR);
+            });
+
+          $.when(
+              leftTableProcessDeferred,
+              rightTableProcessDeferred
+          ).then(function (leftTableData, rightTableData) {
+            retrievalProcessDeferred.resolve(leftTableData, rightTableData);
+          }).fail(function (jqXHR, textStatus) {
+                    retrievalProcessDeferred.reject();
+          });
+          return retrievalProcessDeferred.promise();  //Return a promise that will be resolved 
+        },
+
+        onRightTableQuerySuccess =  function (rightTableData, status) {
+                                      var rightTableById = {},    //Records of the first table, indexed by the field to join (rightTableJoinField)
+                                          n, i, t;
+
+                                      if (typeof adapter === "function") {
+                                          rightTableData = adapter(rightTableData);
+                                      }
+
+                                      //Process the transaction data, and then resolve the promise
+                                      n = rightTableData.length;
+                                      for (i = 0; i < n; i++) {
+                                          t = rightTableData[i];
+                                          if (t && typeof t[rightTableJoinField] !== undefined){
+                                              rightTableById[t[rightTableJoinField]] = t;
+                                          }
+                                      }
+
+                                      rightTableProcessDeferred.resolve(rightTableById);
+                                  },
+      
+        onLeftTableQuerySuccess = function (leftTableData, status) {
+                                      if (typeof adapter === "function") {
+                                          leftTableData = adapter(leftTableData);
+                                      } 
+                                      leftTableProcessDeferred.resolve(leftTableData);
+                                  },
+
+        onDataProcessed = function (leftTableData, rightTableData) {
+          var row, i, j, 
+              m = joinFields.length, 
+              n = leftTableData.length,
+              id, 
+              field;
+
+          for (i = 0; i < n; i++) {
+              row = leftTableData[i];
+              id = row && row[leftTableJoinField];
+              if (id) {
+                  //Copy all joined fields
+                  for (j = 0; j < m; j++){
+                      field = joinFields[j];
+                      row[field] = rightTableData[id] && rightTableData[id][field];
+                  }
+              }
+          }
+
+          return callback(null, leftTableData);  //onDataProcessedDeferred.promise();
+        };     
+    
+  return $.ajax({
+            method: 'POST',
+            url: authUrl,
+            data: authParameters,
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+        }
+      ).then(onAuthToken)
+      .then(function(l, r) {
+        return onDataProcessed(l,r);
+      })
+      .fail(callback);    
+}
+{% endhighlight %}
