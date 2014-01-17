@@ -76,6 +76,7 @@ In a synchronous environment, you then have to run the first query, then run the
 
 In pseudo-JavaScript:
 
+{% highlight javascript %}
 var data1 = queryDB_Synch(query1);
 data1 = preProcessData(data1);
 var data2 = queryDB_Synch(query2);
@@ -83,12 +84,13 @@ data2 = preProcessData(data1);
 var result = mergeData(data1, data2);
 doSomething(result);
 __next statement__
+{% endhighlight %}
 
 ###Pseudo-join in an asynchronous environment
 
 Since some of this calls are asynchronous or equivalently have an asynchronous version, you might want to switch to a different flow of execution. But, without using promises, what would you do? You'd use nested callbacks, so for example, in pseudo-JavaScript:
 
-'''
+{% highlight javascript %}
 queryDB_Asynch(query1, function (err1, data1) {
   data1 = preProcessData(data1);
   queryDB_Asynch(query2, function(err2, data2) {
@@ -98,7 +100,7 @@ queryDB_Asynch(query1, function (err1, data1) {
   });
 });
 __next statement__
-'''
+{% endhighlight %}
 
 where __doSomething__ is a callback performing the operations at point 10 of the synchronous workflow, and checks on the error flags are omitted for clarity.
 
@@ -118,7 +120,7 @@ D. call doSomething on the result of mergeData
 
 So, if for example we know that query2 requires more time than query1 to be completed, one might be tempeted to code up something like this:
 
-'''
+{% highlight javascript %}
 //DO NOT do this
 queryDB_Asynch(query2, function(err2, data2) {
   preProcessData(data2);
@@ -128,12 +130,12 @@ queryDB_Asynch(query2, function(err2, data2) {
 queryDB_Asynch(query1, function (err1, data1) {
   data1 = preProcessData(data1);
 });
-'''
+{% endhighlight %}
 
 But this doesn't really work. Or, even worse, it could work some times, or most of the times, and then fail when you least expect it, throwing you in a endless painful nightimare before you can figure out what happens.
 Moving the quickest query before the slowest won't help either:
 
-'''
+{% highlight javascript %}
 //DO NOT do this either
 queryDB_Asynch(query1, function (err1, data1) {
   data1 = preProcessData(data1);
@@ -143,7 +145,7 @@ queryDB_Asynch(query2, function(err2, data2) {
   var result = mergeData(data1, data2);
   doSomething(result);
 });
-'''
+{% endhighlight %}
 
 The point is, there is no way you can tell which query will return first. Even if there is a huge difference in the size of the tables and/or in the number of results retrieved, when dealing with asynch calls, the behaviour is unpredictable, because a lot of issues could cause an unexpected latency.
 
@@ -151,7 +153,7 @@ The point is, there is no way you can tell which query will return first. Even i
 
 It might look like employing flag variables to check if the other branch has been completed is a good idea:
 
-'''
+{% highlight javascript %}
 //Definitely DO NOT do this EVER!
 var queryCompleted_1 = false,
     queryCompleted_2 = false;
@@ -174,7 +176,7 @@ queryDB_Asynch(query2, function(err2, data2) {
     queryCompleted_2 = true;
   }
 });
-'''
+{% endhighlight %}
 
 As you can perhaps have already guessed, it isn't! This is not only inefficient, not DRY, and quite frankly ugly, this is a potential recipe for disaster, because you expose yourself to a potential race condition.
 As unlikely as it can be, since there is no way to ensure locks or atomicity, it can happen that between the execution of the if statement that checks queryCompleted_i in the first branch to complete the query and the next execution of the assignment in the relative else branch, the other branch reaches as well the same execution points, so that in that branch the if condition fails as well, and none of them ends up merging the results and calling doSomething. Since you don't control the order of execution of the instructions, you can't make any assumption.
@@ -192,7 +194,7 @@ One more caveat that needs to be mentioned before proceeding to the final versio
 
 So, all considered, we want to create two deferred , one for the first branch, and one for the second one, which return promises resolved only when the data retrieved from their queries is successfully preProcessed.
 
-'''
+{% highlight javascript %}
 var queryBranch_1 = $.Deferred(),
     queryBranch_2 = $.Deferred();
 
@@ -211,11 +213,11 @@ $.when(queryBranch_1.promise(), queryBranch_2.promise())
     var result = mergeData(data1, data2);
     doSomething(result);
 });
-'''
+{% endhighlight %}
 
 Or, in the hypothesis that queryDB_Asynch returns a promise as well, and moving the code around a little bit:
 
-'''
+{% highlight javascript %}
 var queryBranch_1 = $.Deferred(),
     queryBranch_2 = $.Deferred();
 
@@ -233,7 +235,7 @@ $.when(queryBranch_1.promise(), queryBranch_2.promise())
   .then(function(data1, data2) {
     doSomething(mergeData(data1, data2));
 });
-'''
+{% endhighlight %}
 
 Simple, elegant, efficient and race-free.
 
