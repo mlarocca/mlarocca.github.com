@@ -34,7 +34,7 @@ While promises/futures have been around since the 70s (although only in the last
 For decades, since relational databases where invented, we were thought that thr third normal form (or at least some kind of normal form) was the goal every DB architect should aspire to.
 With the raise of Ajax, web applications has kind of taken over the market; distributed application have different kind of needs in term of availability and responsiveness (not to mention security), and as the average number of users they serve grew, scalability became increasingly important, so much that failing to scale would determine the thrive or death of a web site. Under these considerations, the assumptions on the DBs started to be rethought, questioning our absolute need for relation integrity. 
 The main reason for that is performance: maintaining relations between different tables, turns out to be pretty costly when you need to split your DB to several distributed servers, in order to improve your response time, to allow for backups copy, and to overcome the space limitations of a single server (which inevitably you will hit if your company is hyper-growing).
-It turns out that we do not always need a relational DB, nor we always need (or can) guarantee the _A.C.I.D._ properties (we can soften some of them, depending on our needs).
+It turns out that we do not always need a relational DB, nor we always need (or can) guarantee the __A.C.I.D.__ properties (we can soften some of them, depending on our needs).
 To go back to data relations, very often web companies just need to store key-value pairs, or schema-free lists of entities totally unrelated among them. When this happens, noSql DBs represent a valid alternative: long story short, they can be easily split and duplicated, and so scaling them is much more easily; this means they can provide you with better performance, which in turn means your website will be responsive and users won't leave and you'll stay in business.
 In practice, there is always a tradeoff among many aspects, and you'll have to carefully review each of them to decide the best solution for your business.
 
@@ -83,7 +83,7 @@ var data2 = queryDB_Synch(query2);
 data2 = preProcessData(data1);
 var result = mergeData(data1, data2);
 doSomething(result);
-__next statement__
+__next_statement__
 {% endhighlight %}
 
 ###Pseudo-join in an asynchronous environment
@@ -99,7 +99,7 @@ queryDB_Asynch(query1, function (err1, data1) {
     doSomething(result);
   });
 });
-__next statement__
+__next_statement__
 {% endhighlight %}
 
 where __doSomething__ is a callback performing the operations at point 10 of the synchronous workflow, and checks on the error flags are omitted for clarity.
@@ -113,11 +113,10 @@ Where could we improve this? Well, for example, we notice that we don't need to 
 1. Start the first query
 2. Start the second query
 3. continue execution of next statements
-
-A. As soon as the first query returns, preProcess data1
-B. As soon as the second query returns, preProcess data2
-C. When both calls to preProcess returns their result, call mergeData
-D. call doSomething on the result of mergeData
+4. (A1) As soon as the first query returns, preProcess data1
+5. (A2) As soon as the second query returns, preProcess data2
+6. (B) When both calls to preProcess returns their result, call mergeData
+7. (C) call doSomething on the result of mergeData
 
 So, if for example we know that query2 requires more time than query1 to be completed, one might be tempeted to code up something like this:
 
@@ -187,7 +186,7 @@ And clearly a race condition is hardly ever an acceptable risk.
 
 So, this is where promises and deferred comes into play.
 
-If you know how promises and deferred work in JavaScript, or if you have read the posts linked above, you should know what we need here: while step 1->A and 2->B can be performed using callbacks, step A+B -> C needs a new way: the _when_ method, which is specifically designed to synch parallel tasks!
+If you know how promises and deferred work in JavaScript, or if you have read the posts linked above, you should know what we need here: while step _1 -> A1_ and _2 -> A2_ can be performed using callbacks, step _(A1 & A2) -> C_ needs a new way: the **_when_** method, which is specifically designed to synch parallel tasks!
 
 In jQuery, _$.when()_ creates a new promise which will be resolved if both promises inside are resolved, or rejected if one of the promises fails. You can pass any number of arguments to _when_, and it takes even non-promise ones: they will be treated as a resolved promise.
 
@@ -252,6 +251,24 @@ So if you need to perform joins often and if it's a critical operation for your 
 Now, here it is a real-life example of simulated left join query in JavaScript, retrieving JSON data from a DB through ajax calls; this example uses promises a bit more extensively because takes authentication into account as well.
 
 {% highlight javascript %}
+/** @method leftJoin
+  * @for dataloader
+  *
+  *    Simulate a left join query on the datataset, if the dataset doesn't allow join queries. Once the data is loaded, the result is passed to a callback
+  * 
+  * @param {Function} callback    The callback to be executed after data is loaded (on success). 
+  *                                It can be any function taking data as second parameter and an error or null as first (node.js style):
+  *                                for example, it can put the data on the console or use it to build a chart.
+  * @param {String} leftTableQuery     The query to be run on the first table of the join.
+  * @param {String} rightTableQuery The query to be run on the second table of the join.
+  * @param {String} leftTableJoinField     The field of the left table to be used for the join.
+  * @param {String} rightTableJoinField The field of the right table to be used for the join.
+  * @param {Array} joinFields A list of the fields of the right table that are selected for the query (all of the left table ones will be).
+  *    @param {Object} authParameters    The parameters to be passed to the oauth server.
+  *    @param {Function} [adapter]    Optionally an adapter can be passed to process the data as retrieved from the server before returning it.
+  * @return {Promise}    A promise that in the end will assume the value returned from callback once called on the result of the join query.
+  *    @throw TypeError if the callback parameter or the query values aren't valid.
+  */
 function leftJoin (callback, authUrl, queryUrl, leftTableQuery, rightTableQuery, leftTableJoinField, rightTableJoinField, joinFields, authParameters, adapter) {
     "use strict";
     
@@ -300,14 +317,15 @@ function leftJoin (callback, authUrl, queryUrl, leftTableQuery, rightTableQuery,
               rightTableProcessDeferred
           ).then(function (leftTableData, rightTableData) {
             retrievalProcessDeferred.resolve(leftTableData, rightTableData);
-          }).fail(function (jqXHR, textStatus) {
+          }).fail() {
                     retrievalProcessDeferred.reject();
           });
           return retrievalProcessDeferred.promise();  //Return a promise that will be resolved 
         },
 
-        onRightTableQuerySuccess =  function (rightTableData, status) {
-                                      var rightTableById = {},    //Records of the first table, indexed by the field to join (rightTableJoinField)
+        onRightTableQuerySuccess =  function (rightTableData) {
+                                      //Records of the first table, indexed by the field to join (rightTableJoinField)
+                                      var rightTableById = {},    
                                           n, i, t;
 
                                       if (typeof adapter === "function") {
@@ -326,7 +344,7 @@ function leftJoin (callback, authUrl, queryUrl, leftTableQuery, rightTableQuery,
                                       rightTableProcessDeferred.resolve(rightTableById);
                                   },
       
-        onLeftTableQuerySuccess = function (leftTableData, status) {
+        onLeftTableQuerySuccess = function (leftTableData) {
                                       if (typeof adapter === "function") {
                                           leftTableData = adapter(leftTableData);
                                       } 
