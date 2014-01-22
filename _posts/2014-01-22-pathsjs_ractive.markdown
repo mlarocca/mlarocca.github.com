@@ -53,7 +53,7 @@ ractive.set("recipient", "everybody");
 in your browser's console!
 
 To learn more about ractive's features, please take the [Interactive tutorial](http://learn.ractivejs.org/).
-Once done with that, you can probably have a better grasp at [this](TODO ADDRESS) complex example using SVG
+Once done with that, you can probably have a better grasp at [this](http://learn.ractivejs.org/svg/2/) complex example using SVG
 
 The crucial part we are interested in, is the template:
 
@@ -225,9 +225,9 @@ test.js file (the relevant part):
       loadCountries(ractive.get('datasets')[0].filename);
 {% endhighlight %}
 
-The rest of the code (a couple of utility js modules, the css file, and the jsons in the example) can be found here [TODO](TODO)
+The rest of the code (a couple of utility js modules, the css file, and the jsons in the example) can be found here [on github](https://github.com/mlarocca/PathsJS-demo)
 
-You can take a look at the [working demo](TODO:link)
+You can take a look at the [working demo](http://mlarocca.github.io/pathsjsdemo/demo.html)
 
 As you can see, I took a step further with respect to the pathjs demo, allowing the chart to be dynamically populated, and animating the transitions. 
 The effect, in my opinion, is stunning, especially considering that it took me like 5 minutes to add this new feature to the example.
