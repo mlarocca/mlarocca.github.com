@@ -29,9 +29,7 @@ Here it is how the example in the 60 second setup would look like, assuming you 
     <script src='js/Ractive.js'></script>
 
     <script id='myTemplate' type='text/ractive'>
-    {% raw  %}
-        <p>{{greeting}}, {{recipient}}!</p>
-    {% endraw  %}        
+        <p>{% raw  %}{{greeting}}, {{recipient}}{% endraw  %}!</p>
     </script>
 
     <script>
@@ -82,7 +80,7 @@ Besides the complexity and the nuances, the main difference is that using __Ract
 {% highlight html %}
     <script id='myTemplate' type='text/ractive'>
         <p>{% raw  %}{{greeting}}, {{recipient}}{% endraw  %}!</p>
-        <input type='text' value='{{recipient}}'>        
+        <input type='text' value='{% raw  %}{{recipient}}{% endraw  %}'>        
     </script>
 {% endhighlight %}
 Even using [__jQuery__](http://jquery.com) or another equally powerful lib, every time you update that variable, __Ractive__ will redraw every node in your _HTML_ page that depends on it, and it will do in the most efficient possible way (or so).
@@ -106,7 +104,7 @@ The crucial part we are interested in, is the template:
     </defs>
 
     <!-- horizontal line representing freezing -->
-    <line class='freezing' x1='0' y1={% raw  %}'{{ yScale(0) }}' x2='{{width}}' y2='{{ yScale(0) }}'{% endraw  %}/>
+    <line class='freezing' x1='0' y1='{% raw  %}{{ yScale(0) }}{% endraw  %}' x2='{{width}}' y2='{% raw  %}{{ yScale(0) }}{% endraw  %}'/>
     {% raw  %}{{#selectedCity}}{% endraw  %}
       
       <!-- the band -->
@@ -114,13 +112,13 @@ The crucial part we are interested in, is the template:
 
       {% raw  %}{{#months:i}}{% endraw  %}
         <!-- point markers for average highs -->
-        <g class='marker' transform='translate({% raw  %}{{ xScale(i+0.5) }},{{ yScale(high) }}{% endraw  %})'>
+        <g class='marker' transform='{% raw  %}translate({{ xScale(i+0.5) }},{{ yScale(high) }}{% endraw  %})'>
           <circle r='2'/>
           <text y='-10'>{% raw  %}{{ format(high,degreeType) }}{% endraw  %}</text>
         </g>
 
         <!-- point markers for average lows -->
-        <g class='marker' transform='translate({% raw  %}{{ xScale(i+0.5) }},{{ yScale(low) }}{% endraw  %})'>
+        <g class='marker' transform='{% raw  %}translate({{ xScale(i+0.5) }},{{ yScale(low) }}{% endraw  %})'>
           <circle r='2'/>
           <text y='15'>{% raw  %}{{ format(low,degreeType) }}{% endraw  %}</text>
         </g>
@@ -170,7 +168,7 @@ Html file with templates:
             <g transform="translate(200, 200)">
               {% raw  %}{{# Pie({center: center, r: r, R: R, data: countries, accessor: accessor, colors: colors}) }}{% endraw  %}
                 {% raw  %}{{# curves:num }}{% endraw  %}
-                  <g transform="translate({% raw  %}{{ move(sector.centroid, expanded[num]) }}{% endraw  %})">
+                  <g transform="{% raw  %}translate({{ move(sector.centroid, expanded[num]) }}{% endraw  %})">
                     <linearGradient id = "{% raw  %}grad-{{ num }}{% endraw  %}">
                       <stop stop-color = "{% raw  %}{{ color_string(color) }}{% endraw  %}" offset = "0%"/>
                       <stop stop-color = "{% raw  %}{{ lighten(color) }}{% endraw  %}" offset = "100%"/>
