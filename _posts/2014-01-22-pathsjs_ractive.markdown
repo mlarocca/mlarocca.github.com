@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Reactive graphs with Ractive.js and Paths.js
+title: Reactive SVG charts with Ractive.js and Paths.js
 ---
 
 ##Ractive
