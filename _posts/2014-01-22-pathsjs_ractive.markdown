@@ -29,7 +29,9 @@ Here it is how the example in the 60 second setup would look like, assuming you 
     <script src='js/Ractive.js'></script>
 
     <script id='myTemplate' type='text/ractive'>
-        <p>{% raw  %}{{greeting}}, {{recipient}}{% endraw  %}!</p>
+    {% raw  %}
+        <p>{{greeting}}, {{recipient}}!</p>
+    {% endraw  %}        
     </script>
 
     <script>
@@ -104,26 +106,28 @@ The crucial part we are interested in, is the template:
     </defs>
 
     <!-- horizontal line representing freezing -->
-    <line class='freezing' x1='0' y1='{% raw  %}{{ yScale(0) }}{% endraw  %}' x2='{{width}}' y2='{% raw  %}{{ yScale(0) }}{% endraw  %}'/>
-    {% raw  %}{{#selectedCity}}{% endraw  %}
+    {% raw  %}
+    <line class='freezing' x1='0' y1='{{ yScale(0) }}' x2='{{width}}' y2='{{ yScale(0) }}'/>
+    {{#selectedCity}}
       
       <!-- the band -->
-      <polygon fill='url(#gradient)' stroke='url(#gradient)' class='temperature-band' points='{% raw  %}{{ getBand(months,xScale,yScale) }}{% endraw  %}'/>
+      <polygon fill='url(#gradient)' stroke='url(#gradient)' class='temperature-band' points='{{ getBand(months,xScale,yScale) }}'/>
 
-      {% raw  %}{{#months:i}}{% endraw  %}
+      {{#months:i}}
         <!-- point markers for average highs -->
-        <g class='marker' transform='{% raw  %}translate({{ xScale(i+0.5) }},{{ yScale(high) }}{% endraw  %})'>
+        <g class='marker' transform='translate({{ xScale(i+0.5) }},{{ yScale(high) }})'>
           <circle r='2'/>
-          <text y='-10'>{% raw  %}{{ format(high,degreeType) }}{% endraw  %}</text>
+          <text y='-10'>{{ format(high,degreeType) }}</text>
         </g>
 
         <!-- point markers for average lows -->
-        <g class='marker' transform='{% raw  %}translate({{ xScale(i+0.5) }},{{ yScale(low) }}{% endraw  %})'>
+        <g class='marker' transform='translate({{ xScale(i+0.5) }},{{ yScale(low) }})'>
           <circle r='2'/>
-          <text y='15'>{% raw  %}{{ format(low,degreeType) }}{% endraw  %}</text>
+          <text y='15'>{{ format(low,degreeType) }}</text>
         </g>
-      {% raw  %}{{/months}}{% endraw  %}
-    {% raw  %}{{/selectedCity}}{% endraw  %}
+      {{/months}}
+    {{/selectedCity}}
+    {% endraw  %}
 
   </svg>
 {% endhighlight %}
@@ -154,11 +158,12 @@ Html file with templates:
         <div class="panel-heading">
           <h2 class="panel-title">Pie Chart</h2>
         </div>
-        
-        <select value='{% raw  %}{{selectedDataset}}{% endraw  %}' on-change='loadData'>
-          {% raw  %}{{#datasets}}{% endraw  %}
-            <option value='{% raw  %}{{.["filename"]}}{% endraw  %}'>{% raw  %}{{.["label"]}}{% endraw  %}</option>
-          {% raw  %}{{/datasets}}{% endraw  %}
+        {% raw  %}
+
+        <select value='{{selectedDataset}}' on-change='loadData'>
+          {{#datasets}}
+            <option value='{{.["filename"]}}'>{{.["label"]}}</option>
+          {{/datasets}}
         </select>
 
         <div class="panel-body">
@@ -166,33 +171,34 @@ Html file with templates:
 
           <svg width=375 height=400>
             <g transform="translate(200, 200)">
-              {% raw  %}{{# Pie({center: center, r: r, R: R, data: countries, accessor: accessor, colors: colors}) }}{% endraw  %}
-                {% raw  %}{{# curves:num }}{% endraw  %}
-                  <g transform="{% raw  %}translate({{ move(sector.centroid, expanded[num]) }}{% endraw  %})">
-                    <linearGradient id = "{% raw  %}grad-{{ num }}{% endraw  %}">
-                      <stop stop-color = "{% raw  %}{{ color_string(color) }}{% endraw  %}" offset = "0%"/>
-                      <stop stop-color = "{% raw  %}{{ lighten(color) }}{% endraw  %}" offset = "100%"/>
+              {{# Pie({center: center, r: r, R: R, data: countries, accessor: accessor, colors: colors}) }}
+                {{# curves:num }}
+                  <g transform="translate({{ move(sector.centroid, expanded[num]) }})">
+                    <linearGradient id = "grad-{{ num }}">
+                      <stop stop-color = "{{ color_string(color) }}" offset = "0%"/>
+                      <stop stop-color = "{{ lighten(color) }}" offset = "100%"/>
                     </linearGradient>
-                    <path on-click="expand" d="{% raw  %}{{ sector.path.print() }}{% endraw  %}" fill="{% raw  %}url(#grad-{{ num }}){% endraw  %}" />
-                    <text text-anchor="middle" transform="{% raw  %}translate({{ point(sector.centroid) }}){% endraw  %}">{% raw  %}{{ item.name }}{% endraw  %}</text>
+                    <path on-click="expand" d="{{ sector.path.print() }}" fill="url(#grad-{{ num }})" />
+                    <text text-anchor="middle" transform="translate({{ point(sector.centroid) }})">{{ item.name }}</text>
                   </g>
-                {% raw  %}{{/ curves }}{% endraw  %}
-              {% raw  %}{{/ end of pie}}{% endraw  %}
+                {{/ curves }}
+              {{/ end of pie}}
             </g>
           </svg>
 
-          {% raw  %}{{# countries: num }}{% endraw  %}
-            {% raw  %}{{# expanded[num] == 1}}{% endraw  %}
+          {{# countries: num }}
+            {{# expanded[num] == 1}}
               <div class="country-info">
-                <h4>{% raw  %}{{ name }}{% endraw  %}</h4>
-                <p>Population: <span class="label label-info">{% raw  %}{{ population }}{% endraw  %}</span></p>
+                <h4>{{ name }}</h4>
+                <p>Population: <span class="label label-info">{{ population }}</span></p>
               </div>
-            {% raw  %}{{/ end if }}{% endraw  %}
-          {% raw  %}{{/ countries }}{% endraw  %}
+            {{/ end if }}
+          {{/ countries }}
         </div>
       </div>
     </script>    
     <script data-main="js/test" src="js/require.js"></script>
+    {% endraw  %}
 
   </body>
 </html>
@@ -277,18 +283,22 @@ Of course, my contribution was really minimal: it's just that using both librari
 Notice, for example, how you declare the chart, and then iterate on its building blocks:
 
 {% highlight html %}
-  {% raw  %}{{# Pie({center: center, r: r, R: R, data: countries, accessor: accessor, colors: colors}) }}{% endraw  %}
-    {% raw  %}{{# curves:num }}{% endraw  %}
-      <g transform="{% raw  %}translate({{ move(sector.centroid, expanded[num]) }}){% endraw  %}">
-        <linearGradient id = "{% raw  %}grad-{{ num }}{% endraw  %}">
-          <stop stop-color = "{% raw  %}{{ color_string(color) }}{% endraw  %}" offset = "0%"/>
-          <stop stop-color = "{% raw  %}{{ lighten(color) }}{% endraw  %}" offset = "100%"/>
+  {% raw  %}
+
+  {{# Pie({center: center, r: r, R: R, data: countries, accessor: accessor, colors: colors}) }}
+    {{# curves:num }}
+      <g transform="translate({{ move(sector.centroid, expanded[num]) }})">
+        <linearGradient id = "grad-{{ num }}">
+          <stop stop-color = "{{ color_string(color) }}" offset = "0%"/>
+          <stop stop-color = "{{ lighten(color) }}" offset = "100%"/>
         </linearGradient>
-        <path on-click="expand" d="{% raw  %}{{ sector.path.print() }}{% endraw  %}" fill="{% raw  %}url(#grad-{{ num }}){% endraw  %}" />
-        <text text-anchor="middle" transform="{% raw  %}translate({{ point(sector.centroid) }}){% endraw  %}">{% raw  %}{{ item.name }}{% endraw  %}</text>
+        <path on-click="expand" d="{{ sector.path.print() }}" fill="url(#grad-{{ num }})" />
+        <text text-anchor="middle" transform="translate({{ point(sector.centroid) }})">{{ item.name }}</text>
       </g>
-    {% raw  %}{{/ curves }}{% endraw  %}
-  {% raw  %}{{/ end of pie}}{% endraw  %}
+    {{/ curves }}
+  {{/ end of pie}}    
+
+  {% endraw  %}
 
 {% endhighlight %}
 
