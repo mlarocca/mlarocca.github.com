@@ -81,10 +81,8 @@ And this is just a fairly simple example!
 Besides the complexity and the nuances, the main difference is that using __Ractive__ you bind a value to a variable, that you can use in more than one place inside your page:
 {% highlight html %}
     <script id='myTemplate' type='text/ractive'>
-    {% raw  %}
-        <p>{{greeting}}, {{recipient}}!</p>
-        <input type='text' value='{{recipient}}'>
-    {% endraw  %}        
+        <p>{% raw  %}{{greeting}}, {{recipient}}{% endraw  %}!</p>
+        <input type='text' value='{{recipient}}'>        
     </script>
 {% endhighlight %}
 Even using [__jQuery__](http://jquery.com) or another equally powerful lib, every time you update that variable, __Ractive__ will redraw every node in your _HTML_ page that depends on it, and it will do in the most efficient possible way (or so).
@@ -108,28 +106,26 @@ The crucial part we are interested in, is the template:
     </defs>
 
     <!-- horizontal line representing freezing -->
-    {% raw  %}
-    <line class='freezing' x1='0' y1='{{ yScale(0) }}' x2='{{width}}' y2='{{ yScale(0) }}'/>
-    {{#selectedCity}}
+    <line class='freezing' x1='0' y1={% raw  %}'{{ yScale(0) }}' x2='{{width}}' y2='{{ yScale(0) }}'{% endraw  %}/>
+    {% raw  %}{{#selectedCity}}{% endraw  %}
       
       <!-- the band -->
-      <polygon fill='url(#gradient)' stroke='url(#gradient)' class='temperature-band' points='{{ getBand(months,xScale,yScale) }}'/>
+      <polygon fill='url(#gradient)' stroke='url(#gradient)' class='temperature-band' points='{% raw  %}{{ getBand(months,xScale,yScale) }}{% endraw  %}'/>
 
-      {{#months:i}}
+      {% raw  %}{{#months:i}}{% endraw  %}
         <!-- point markers for average highs -->
-        <g class='marker' transform='translate({{ xScale(i+0.5) }},{{ yScale(high) }})'>
+        <g class='marker' transform='translate({% raw  %}{{ xScale(i+0.5) }},{{ yScale(high) }}{% endraw  %})'>
           <circle r='2'/>
-          <text y='-10'>{{ format(high,degreeType) }}</text>
+          <text y='-10'>{% raw  %}{{ format(high,degreeType) }}{% endraw  %}</text>
         </g>
 
         <!-- point markers for average lows -->
-        <g class='marker' transform='translate({{ xScale(i+0.5) }},{{ yScale(low) }})'>
+        <g class='marker' transform='translate({% raw  %}{{ xScale(i+0.5) }},{{ yScale(low) }}{% endraw  %})'>
           <circle r='2'/>
-          <text y='15'>{{ format(low,degreeType) }}</text>
+          <text y='15'>{% raw  %}{{ format(low,degreeType) }}{% endraw  %}</text>
         </g>
-      {{/months}}
-    {{/selectedCity}}
-    {% endraw  %}
+      {% raw  %}{{/months}}{% endraw  %}
+    {% raw  %}{{/selectedCity}}{% endraw  %}
 
   </svg>
 {% endhighlight %}
@@ -160,12 +156,11 @@ Html file with templates:
         <div class="panel-heading">
           <h2 class="panel-title">Pie Chart</h2>
         </div>
-        {% raw  %}
-
-        <select value='{{selectedDataset}}' on-change='loadData'>
-          {{#datasets}}
-            <option value='{{.["filename"]}}'>{{.["label"]}}</option>
-          {{/datasets}}
+        
+        <select value='{% raw  %}{{selectedDataset}}{% endraw  %}' on-change='loadData'>
+          {% raw  %}{{#datasets}}{% endraw  %}
+            <option value='{% raw  %}{{.["filename"]}}{% endraw  %}'>{% raw  %}{{.["label"]}}{% endraw  %}</option>
+          {% raw  %}{{/datasets}}{% endraw  %}
         </select>
 
         <div class="panel-body">
@@ -173,34 +168,33 @@ Html file with templates:
 
           <svg width=375 height=400>
             <g transform="translate(200, 200)">
-              {{# Pie({center: center, r: r, R: R, data: countries, accessor: accessor, colors: colors}) }}
-                {{# curves:num }}
-                  <g transform="translate({{ move(sector.centroid, expanded[num]) }})">
-                    <linearGradient id = "grad-{{ num }}">
-                      <stop stop-color = "{{ color_string(color) }}" offset = "0%"/>
-                      <stop stop-color = "{{ lighten(color) }}" offset = "100%"/>
+              {% raw  %}{{# Pie({center: center, r: r, R: R, data: countries, accessor: accessor, colors: colors}) }}{% endraw  %}
+                {% raw  %}{{# curves:num }}{% endraw  %}
+                  <g transform="translate({% raw  %}{{ move(sector.centroid, expanded[num]) }}{% endraw  %})">
+                    <linearGradient id = "{% raw  %}grad-{{ num }}{% endraw  %}">
+                      <stop stop-color = "{% raw  %}{{ color_string(color) }}{% endraw  %}" offset = "0%"/>
+                      <stop stop-color = "{% raw  %}{{ lighten(color) }}{% endraw  %}" offset = "100%"/>
                     </linearGradient>
-                    <path on-click="expand" d="{{ sector.path.print() }}" fill="url(#grad-{{ num }})" />
-                    <text text-anchor="middle" transform="translate({{ point(sector.centroid) }})">{{ item.name }}</text>
+                    <path on-click="expand" d="{% raw  %}{{ sector.path.print() }}{% endraw  %}" fill="{% raw  %}url(#grad-{{ num }}){% endraw  %}" />
+                    <text text-anchor="middle" transform="{% raw  %}translate({{ point(sector.centroid) }}){% endraw  %}">{% raw  %}{{ item.name }}{% endraw  %}</text>
                   </g>
-                {{/ curves }}
-              {{/ end of pie}}
+                {% raw  %}{{/ curves }}{% endraw  %}
+              {% raw  %}{{/ end of pie}}{% endraw  %}
             </g>
           </svg>
 
-          {{# countries: num }}
-            {{# expanded[num] == 1}}
+          {% raw  %}{{# countries: num }}{% endraw  %}
+            {% raw  %}{{# expanded[num] == 1}}{% endraw  %}
               <div class="country-info">
-                <h4>{{ name }}</h4>
-                <p>Population: <span class="label label-info">{{ population }}</span></p>
+                <h4>{% raw  %}{{ name }}{% endraw  %}</h4>
+                <p>Population: <span class="label label-info">{% raw  %}{{ population }}{% endraw  %}</span></p>
               </div>
-            {{/ end if }}
-          {{/ countries }}
+            {% raw  %}{{/ end if }}{% endraw  %}
+          {% raw  %}{{/ countries }}{% endraw  %}
         </div>
       </div>
     </script>    
     <script data-main="js/test" src="js/require.js"></script>
-    {% endraw  %}
 
   </body>
 </html>
@@ -285,22 +279,18 @@ Of course, my contribution was really minimal: it's just that using both librari
 Notice, for example, how you declare the chart, and then iterate on its building blocks:
 
 {% highlight html %}
-  {% raw  %}
-
-  {{# Pie({center: center, r: r, R: R, data: countries, accessor: accessor, colors: colors}) }}
-    {{# curves:num }}
-      <g transform="translate({{ move(sector.centroid, expanded[num]) }})">
-        <linearGradient id = "grad-{{ num }}">
-          <stop stop-color = "{{ color_string(color) }}" offset = "0%"/>
-          <stop stop-color = "{{ lighten(color) }}" offset = "100%"/>
+  {% raw  %}{{# Pie({center: center, r: r, R: R, data: countries, accessor: accessor, colors: colors}) }}{% endraw  %}
+    {% raw  %}{{# curves:num }}{% endraw  %}
+      <g transform="{% raw  %}translate({{ move(sector.centroid, expanded[num]) }}){% endraw  %}">
+        <linearGradient id = "{% raw  %}grad-{{ num }}{% endraw  %}">
+          <stop stop-color = "{% raw  %}{{ color_string(color) }}{% endraw  %}" offset = "0%"/>
+          <stop stop-color = "{% raw  %}{{ lighten(color) }}{% endraw  %}" offset = "100%"/>
         </linearGradient>
-        <path on-click="expand" d="{{ sector.path.print() }}" fill="url(#grad-{{ num }})" />
-        <text text-anchor="middle" transform="translate({{ point(sector.centroid) }})">{{ item.name }}</text>
+        <path on-click="expand" d="{% raw  %}{{ sector.path.print() }}{% endraw  %}" fill="{% raw  %}url(#grad-{{ num }}){% endraw  %}" />
+        <text text-anchor="middle" transform="{% raw  %}translate({{ point(sector.centroid) }}){% endraw  %}">{% raw  %}{{ item.name }}{% endraw  %}</text>
       </g>
-    {{/ curves }}
-  {{/ end of pie}}    
-
-  {% endraw  %}
+    {% raw  %}{{/ curves }}{% endraw  %}
+  {% raw  %}{{/ end of pie}}{% endraw  %}
 
 {% endhighlight %}
 
