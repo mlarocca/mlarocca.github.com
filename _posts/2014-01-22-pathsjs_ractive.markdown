@@ -280,9 +280,9 @@ Notice, for example, how you declare the chart, and then iterate on its building
   {% raw  %}{{# Pie({center: center, r: r, R: R, data: countries, accessor: accessor, colors: colors}) }}{% endraw  %}
     {% raw  %}{{# curves:num }}{% endraw  %}
       <g transform="{% raw  %}translate({{ move(sector.centroid, expanded[num]) }}){% endraw  %}">
-        <linearGradient id = "{% raw  %}grad-{{ num }}{% endraw  %}">
-          <stop stop-color = "{% raw  %}{{ color_string(color) }}{% endraw  %}" offset = "0%"/>
-          <stop stop-color = "{% raw  %}{{ lighten(color) }}{% endraw  %}" offset = "100%"/>
+        <linearGradient id="{% raw  %}grad-{{ num }}{% endraw  %}">
+          <stop stop-color="{% raw  %}{{ color_string(color) }}{% endraw  %}" offset="0%"/>
+          <stop stop-color="{% raw  %}{{ lighten(color) }}{% endraw  %}" offset="100%"/>
         </linearGradient>
         <path on-click="expand" d="{% raw  %}{{ sector.path.print() }}{% endraw  %}" fill="{% raw  %}url(#grad-{{ num }}){% endraw  %}" />
         <text text-anchor="middle" transform="{% raw  %}translate({{ point(sector.centroid) }}){% endraw  %}">{% raw  %}{{ item.name }}{% endraw  %}</text>
