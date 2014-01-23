@@ -52,7 +52,9 @@ Want to see some action? Try to run
 ractive.set("recipient", "everybody");
 {% endhighlight %}
 
-in your browser's console! Now compare this to how you could reach the same goal without __Ractive__ - even using jQuery or another equally powerful lib. You'd have needed to 
+in your browser's console! 
+
+Now compare this to how you could reach the same goal without __Ractive__.
 
 {% highlight html %}
 <!doctype html>
@@ -85,7 +87,7 @@ Besides the complexity and the nuances, the main difference is that using __Ract
     {% endraw  %}        
     </script>
 {% endhighlight %}
-Every time you update that variable, __Ractive__ will redraw every node in your HTML page that depends on it, and it will do in the most efficient possible way (or so).
+Even using [__jQuery__](http://jquery.com) or another equally powerful lib, every time you update that variable, __Ractive__ will redraw every node in your _HTML_ page that depends on it, and it will do in the most efficient possible way (or so).
 
 Without __Ractive__, you have no such binding, you'll have to remember every place in your page that needs to be updated (and with non-trivial examples that can get really messy, believe me!), and every time you have a change in the value, you have to manually update all of them - or at least as many of them as you remember. 
 
@@ -132,7 +134,7 @@ The crucial part we are interested in, is the template:
   </svg>
 {% endhighlight %}
 
-If you know D3, Raphael, or other similar SVG libraries, this might look a bit odd, since you are probably used to create SVG nodes from JavaScript. Here, instead, thanks to reactive programming, we take a different direction, creating the chart inside the html file; this enables us to better separate data from the structure of the charts, in the same way discussed above for HTML.
+If you know D3, Raphael, or other similar SVG libraries, this might look a bit odd, since you are probably used to create SVG nodes from JavaScript. Here, instead, thanks to reactive programming, we take a different direction, creating the chart inside the html file; this enables us to better separate data from the structure of the charts, in the same way discussed above for _HTML_.
 
 ##Paths.js
 
