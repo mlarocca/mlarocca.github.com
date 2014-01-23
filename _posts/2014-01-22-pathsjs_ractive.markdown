@@ -300,9 +300,9 @@ Notice, for example, how you declare the chart, and then iterate on its building
 
 3. [Context](http://learn.ractivejs.org/nested-properties/2/). Each section tag from Ractive provides context for nested properties. Even for anonymous objects (like the one returned from the call to Pie): curves is actually Pie(...).curves, and sector in the next line is Pie(...).curves.sector
 
-4. Attributes. They are automatically updated too.
+4. Attributes: they are automatically updated too.
 
-5. The number of elements doesn't matter, nor does their order: __Ractive__ takes care of every thing. It even animates elements creation/disposal (see transitions on dataset change).
+5. The number of elements doesn't matter, nor does their order: __Ractive__ takes care of everything. It even animates elements creation/disposal (see transitions on dataset change).
 
 6. Animations: it's unlikely that they will slow down your page (as it usually happens), since __Ractive__ handles them using a single animation loop, see [here](http://learn.ractivejs.org/animation/1/).
 
