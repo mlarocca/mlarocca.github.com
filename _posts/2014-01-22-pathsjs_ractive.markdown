@@ -29,7 +29,7 @@ Here it is how the example in the 60 second setup would look like, assuming you 
     <script src='js/Ractive.js'></script>
 
     <script id='myTemplate' type='text/ractive'>
-        <p>{% raw  %}{{greeting}}, ET {{recipient}}{% endraw  %}!</p>
+        <p>{% raw  %}{{greeting}}, {{recipient}}{% endraw  %}!</p>
     </script>
 
     <script>
