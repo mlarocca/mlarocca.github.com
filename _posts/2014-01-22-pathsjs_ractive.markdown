@@ -298,7 +298,7 @@ Notice, for example, how you declare the chart, and then iterate on its building
 
 2. __Paths.js__ _Pie_ method returns an object with an array, curves, listing the shapes to draw. This allows you to separate the data from their visualization, and make the latter more explicit, improving manutenability and easiness of access, simply by moving it to a template rather than keeping it hidden in the belly of a JS library.
 
-3. [Context](http://learn.ractivejs.org/nested-properties/2/). Each section tag from Ractive provides context for nested properties Even for anonymous objects (like the one returned from the call to Pie): curves is actually Pie(...).curves, and sector in the next line is Pie(...).curves.sector
+3. [Context](http://learn.ractivejs.org/nested-properties/2/). Each section tag from Ractive provides context for nested properties. Even for anonymous objects (like the one returned from the call to Pie): curves is actually Pie(...).curves, and sector in the next line is Pie(...).curves.sector
 
 4. Attributes. They are automatically updated too.
 
