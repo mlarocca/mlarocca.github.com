@@ -269,7 +269,7 @@ test.js file (the relevant part):
 
 The rest of the code (a couple of utility js modules, the css file, and the jsons in the example) can be found here [on github](https://github.com/mlarocca/PathsJS-demo).
 
-You can import __Paths.js__ as a [standalone script](https://github.com/andreaferretti/paths-js#standalone-script), which will add the _paths_ object to the global scope. However, my advice is to use RequireJS and import just the elements you need: it will be lighter on your page, and RequireJS will take care of all the dependencies and the loading for you; moreover, the final result is cleaner and less prone to tampering and interferences, since no global object is exposed.
+You can import __Paths.js__ as a [standalone script](https://github.com/andreaferretti/paths-js#standalone-script), which will add the _paths_ object to the global scope. However, my advice is to use __RequireJS__ and import just the elements you need: it will be lighter on your page, and __RequireJS__ will take care of all the dependencies and the loading for you; moreover, the final result is cleaner and less prone to tampering and interferences, since no global object is exposed.
 
 You can take a look at the [working demo](http://mlarocca.github.io/PathsJS-demo/demo.html)
 
