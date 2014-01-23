@@ -133,7 +133,7 @@ If you know D3, Raphael, or other similar SVG libraries, this might look a bit o
 ##Paths.js
 
 Paths.js is another minimal library by [Andrea Ferretti](https://github.com/andreaferretti) that is, explicitly and by design, oriented to support reactive programming by generating SVG paths that can be used with template engines. It looks like a perfect match for __Ractive__, and it actually is: take a look at this [demo](http://andreaferretti.github.io/paths-js-demo/) - source available on [GitHub](https://github.com/andreaferretti/paths-js-demo).
-The source is in CoffeeScript, so - if you feel more like a JavaScript guy - take a look at it's JS counterpart!
+The source is in CoffeeScript, so - if you feel more like a JavaScript guy - take a look at its JS counterpart!
 
 
 Html file with templates:
