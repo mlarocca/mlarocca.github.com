@@ -211,8 +211,10 @@ test.js file (the relevant part):
       $.ajax({url: dataset, 
               headers: {'Content-Type': 'application/json'}, 
               processData: false})
-          .done( function ( data ) {
-            data = JSON.parse(data);
+          .done(function (data) {
+            if (typeof data === 'String') {
+              data = JSON.parse(data);
+            }
             ractive.animate({
               "countries": data,
               'expanded': util.initArray(0, data.length)
@@ -233,7 +235,9 @@ test.js file (the relevant part):
             R: 140,
             countries: [],
             expanded: [],
-            datasets: [{label: "Mixed", filename: "json/countries.json"}, {label: "Europe", filename: "json/europe.json"}, {label: "Asia", filename: "json/asia.json"}],
+            datasets: [{label: "Mixed", filename: "json/countries.json"}, 
+                       {label: "Europe", filename: "json/europe.json"},
+                       {label: "Asia", filename: "json/asia.json"}],
             accessor: function (x) {
                         return x.population;
                       },
