@@ -29,9 +29,9 @@ Here it is how the example in the 60 second setup would look like, assuming you 
     <script src='js/Ractive.js'></script>
 
     <script id='myTemplate' type='text/ractive'>
-    {% raw  %}
-        <p>{{greeting}}, {{recipient}}!</p>
-    {% endraw  %}        
+    
+        <p>{% raw  %}{{greeting}}, TEST {{recipient}}!{% endraw  %}</p>
+    
     </script>
 
     <script>
@@ -81,8 +81,8 @@ And this is just a fairly simple example!
 Besides the complexity and the nuances, the main difference is that using __Ractive__ you bind a value to a variable, that you can use in more than one place inside your page:
 {% highlight html %}
     <script id='myTemplate' type='text/ractive'>
-        <p>{% raw  %}{{greeting}}, {{recipient}}{% endraw  %}!</p>
-        <input type='text' value='{% raw  %}{{recipient}}{% endraw  %}'>        
+        <p>{% raw  %}{{greeting}}, {{recipient}}!{% endraw  %}</p>
+        <input type='text' value={% raw  %}'{{recipient}}'{% endraw  %}>        
     </script>
 {% endhighlight %}
 Even using [__jQuery__](http://jquery.com) or another equally powerful lib, every time you update that variable, __Ractive__ will redraw every node in your _HTML_ page that depends on it, and it will do in the most efficient possible way (or so).
