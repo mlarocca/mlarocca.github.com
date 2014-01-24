@@ -7,7 +7,7 @@ title: Promises, noSql, joins... and more promises
 
 
 Two of the top trending terms of the last couple of years in the tech world are, sure enough, promises and nosql.
-If you are into functional programming, the day will come that you get introduced to futures (deferred) and promises. Here is the thing: I'm not talking about Scheme or Scala; if you ever had to deal with JavaScript, you are into functional programming - if you haven't realized that yet... [this](https://www.youtube.com/playlist?list=PL7664379246A246CB) is a good starting point.
+If you are into functional programming, the day will come that you get introduced to futures (deferred) and promises. Here is the thing: I'm not talking about __Scheme__ or __Scala__; if you ever had to deal with __JavaScript__, you are into functional programming - if you haven't realized that yet... [this](https://www.youtube.com/playlist?list=PL7664379246A246CB) is a good starting point.
 On the other hand, you can not possibly not have at least heard of noSql databases and call yourself a developer. Of course, they are not the answer to every problem (and we will see an example of this tradeoff in a minute), but in many situations where scalability is of the essence, they often are the best choice.
 
 Now, you might wonder, how are these two subjects possibly related? Well, first of all, often noSql datastore servers offers asynchronous calls that either natively behaves as promises or can be wrapped into deferred to mimic promises. [Redis](http://redis.io), for example, lets you pipeline your commands (which also gives a significant performance improvement), although it forces you to use a somewhat cumbersome and odd syntax.
@@ -26,7 +26,7 @@ If you need to get in deeper into the subject, I found this two posts very clear
 
 * [Promise & Deferred Objects in JavaScript Pt.2: in Practice](http://blog.mediumequalsmessage.com/promise-deferred-objects-in-javascript-pt2-practical-use)
 
-Also, if you have some spare time, some theory and the Scala approach are very extensively explained in the [Coursera](http://coursera.org/) course about [Reactive programming in Scala](https://class.coursera.org/reactive-001).
+Also, if you have some spare time, some theory and the __Scala__ approach are very extensively explained in the [Coursera](http://coursera.org/) course about [Reactive programming in Scala](https://class.coursera.org/reactive-001).
 
 ###NoSql
 
@@ -48,7 +48,7 @@ Also, be sure to check this great talk: [Google I/O 2012 - SQL vs NoSQL: Battle 
 
 ###NoSql in practice
 
-To go back to GAE, as you probably know it gives you a semi-free service to host your Java/Python/Php/Go applications. Upon registration, you are provided for free with a certain amount of bandwidth and DB transactions for free, but you can also buy payed plans and pay for what you actually use.
+To go back to __GAE__, as you probably know it gives you a semi-free service to host your Java/Python/Php/Go applications. Upon registration, you are provided for free with a certain amount of bandwidth and DB transactions for free, but you can also buy payed plans and pay for what you actually use.
 You can choose to use mySql for your DB, but as a default, your app will be connected to the datastore, which is based on google BigTable which in turn is built on Google File system, and the whole infrastructure is targeted to allow for seamless, maximum scalability, using a noSql approach.
 This means, you don't have joins. Well, at least you didn't in the earliest days. Now you have the ability to do cross-entity queries, but there are some important limitations (see [here](https://developers.google.com/appengine/docs/java/datastore/transactions) for more) - mainly because, as mentioned, this is a concrete example of the tradeoff between performance and features: the datastore leans towards performance, so if you use it, it is implied you don't need a relations-oriented solution (if you do, you can use mySql and likely skip the rest of this post).
 
@@ -178,7 +178,7 @@ queryDB_Asynch(query2, function(err2, data2) {
 });
 {% endhighlight %}
 
-As you can perhaps have already guessed, it isn't! This is not only inefficient, not DRY, and quite frankly ugly, this is a potential recipe for disaster, because you expose yourself to a potential race condition.
+As you can perhaps have already guessed, it isn't! This is not only inefficient, not _DRY_, and quite frankly ugly, this is a potential recipe for disaster, because you expose yourself to a potential race condition.
 As unlikely as it can be, since there is no way to ensure locks or atomicity, it can happen that between the execution of the if statement that checks queryCompleted_i in the first branch to complete the query and the next execution of the assignment in the relative else branch, the other branch reaches as well the same execution points, so that in that branch the if condition fails as well, and none of them ends up merging the results and calling doSomething. Since you don't control the order of execution of the instructions, you can't make any assumption.
 And clearly a race condition is hardly ever an acceptable risk.
 
@@ -188,7 +188,7 @@ So, this is where promises and deferred comes into play.
 
 If you know how promises and deferred work in JavaScript, or if you have read the posts linked above, you should know what we need here: while step _1 -> A1_ and _2 -> A2_ can be performed using callbacks, step _(A1 & A2) -> C_ needs a new way: the **_when_** method, which is specifically designed to synch parallel tasks!
 
-In jQuery, _$.when()_ creates a new promise which will be resolved if both promises inside are resolved, or rejected if one of the promises fails. You can pass any number of arguments to _when_, and it takes even non-promise ones: they will be treated as a resolved promise.
+In __jQuery__, _$.when()_ creates a new promise which will be resolved if both promises inside are resolved, or rejected if one of the promises fails. You can pass any number of arguments to _when_, and it takes even non-promise ones: they will be treated as a resolved promise.
 
 One more caveat that needs to be mentioned before proceeding to the final version of our code: if _then()_ is passed a function which returns a promise object, the new promise will have the same behaviour as the returned promise; if, on the other hand, _then()_ is passed a function which returns a value, the value becomes the value of the new object.
 
