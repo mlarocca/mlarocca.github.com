@@ -3,7 +3,7 @@ layout: post
 title: Reengineering TubeHound, a video search aggregator
 ---
 
-#AKA Considerations about choosing the right technology stack for your application.
+##AKA Considerations about choosing the right technology stack for your application.
 
 ![thound](../images/thound.jpg)
 
@@ -49,7 +49,7 @@ For the front end, I chose [__jQuery__](http://jquery.com) and [__Bootstrap__](h
 Or I should rather say "how long": well, it took me just 2 weeks to create the new version of [__TubeHound__](http://thound.herokuapp.com/). Although this is a simplified version of the original one, and I was able to re-use some functions (very few, actually) from the previous version, I was stunned by how simple the development was, and how fast I could create a functioning version - even if I had to create a completely new design!
 The development of the original version had taken a lot more time. Excluding the Python back-end, which remained the same, it required at least 2 months to learn __Meteor__ and create a working example.
 
-#Differences
+##Differences
 
 It's not that __Meteor__ isn't a great tool. It is, indeed. Just - as every tool - you need to find the right job to employ it. Or, complementary, for every job you need to carefully choose the right tool - if you are familiar with _Maslow's hammer law_, you might have already figured out this is a textbook case.
 
