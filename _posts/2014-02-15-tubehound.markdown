@@ -5,9 +5,9 @@ title: Reengineering TubeHound, a video search aggregator
 
 #AKA Considerations about choosing the right technology stack for your application.
 
-##What
-
 ![Vrawler](../images/thound.jpg)
+
+##What
 
 A video search aggregator, is a tool that makes your life easier when you need to query online videos. There are many ways to aggregate your searches, and to help you find what you are looking for.
 The idea behind [__TubeHound__](http://thound.herokuapp.com/) is that sometimes, when you are looking for videos about a certain topic, you might as well be interested in videos which do not directly match your search, but are nonetheless connected to the ones that do. For example, when you are looking for a [trailer](http://thound.herokuapp.com/search/monuments%20men/1) of a certain movie, you might be interested to watch trailers of similar movies. Or, if you are looking for a tutorial by a specific content producer, say a [cooking tutorial](http://thound.herokuapp.com/search/Gordon%20Ramsay's%20Ultimate%20Cookery%20Course%20S01E01/1) from your favourite chef, you are probably interested in acknowledging the existence of other chefs who release tutorials, and maybe, once you notice them, you might be interested in searching more results about them.
