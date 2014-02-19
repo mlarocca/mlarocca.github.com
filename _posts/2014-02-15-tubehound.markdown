@@ -5,7 +5,7 @@ title: Reengineering TubeHound, a video search aggregator
 
 #AKA Considerations about choosing the right technology stack for your application.
 
-![Vrawler](../images/thound.jpg)
+![thound](../images/thound.jpg)
 
 ##What
 
