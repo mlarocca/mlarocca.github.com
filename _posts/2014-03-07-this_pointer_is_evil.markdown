@@ -1,9 +1,9 @@
 ---
 layout: post
-title: You'd better stay away from the "this" trap when defining a JavaScript module
+title: You'd better stay away from the "this" trap when defining a _JavaScript_ module
 ---
 
-# JavaScript this pointer is actually evil... especially if you are going to export modules.
+# _JavaScript_ this pointer is actually evil... especially if you are going to export modules.
 
 ## Let's start with an example
 
@@ -32,7 +32,7 @@ testThis(module.funB);
 
 {% endhighlight %}
 
-What is the expected outcome, in your opinion? What do you think it will be the value of **_this_** inside _funB_, when called from **_testThis_**?
+What is the expected outcome, in your opinion? What do you think it will be the value of **_this_** inside **_funB_**, when called from **_testThis_**?
 Chances are you haven't bet on "page will crash", but actually this is the case: an exception will be thrown at this line
 
 {% highlight javascript %}
@@ -46,18 +46,18 @@ If we had called **_funB_** as **_module.funB()_**, there would have been no pro
 
 ##A step back: The this pointer
 
-The Internet is crammed with literature on the infamous "this" pointer. It actually is one of those [bad parts](http://yuiblog.com/blog/2007/06/08/video-crockford-goodstuff/) highlighted by [Douglas Crockford](http://javascript.crockford.com/); the main reason of its evilness is that function context depends on the way you call it.
+The Internet is crammed with literature on the infamous "**_this_**" pointer. It actually is one of those [bad parts](http://yuiblog.com/blog/2007/06/08/video-crockford-goodstuff/) highlighted by [Douglas Crockford](http://javascript.crockford.com/); the main reason of its evilness is that function context depends on the way you call it.
 
-There are, in fact, 4 different ways in which you can invoke a function, producing different values for the this pointer:
+There are, in fact, 4 different ways in which you can invoke a function, producing different values for **_this_**:
 
 
-* Using **_new_** keyword: in this case, the function is invoked as a constructor, and **_this_** is assigned the reference of the newly created Object (that, by the way, will be returned at the end of the method).
+* **As a constructor**: Using **_new_** keyword, the function is invoked as a constructor, and **_this_** is assigned the reference to the newly created Object (that, by the way, will be returned by the method).
 
-* As an object method: If an object instance **_obj_** has a method **_m_**, and you call it as **_obj.m()_**, then the this pointer inside **_m_** will be the reference to **_obj_**.
+* **As a method**: If an object instance **_obj_** has a method **_m_**, and you call it as **_obj.m()_**, then the this pointer inside **_m_** will be the reference to **_obj_**.
 
-* As a standalone function: Here the behaviour depends on if you are using strict mode (i.e. _EcmaScript 5_) or not; before _ES5_, the this pointer passed to the function invoked would have been a reference to the global object (i.e. **_window_**): this was one of the most common bug sources in JavaScript. In _ES5_ this nonsense has been partially corrected: now this will point to null inside these functions - This is still far from the ideal behaviour, however: it would have been better passing a reference to the object inside which the function is called (which would have also solved our problem above in the first place).
+* **As a function**: Here the behaviour depends on if you are using strict mode (i.e. _EcmaScript 5_) or not; before _ES5_, the **_this_** pointer passed to the function invoked would have been a reference to the global object (i.e. **_window_**): this was one of the most common bug sources in _JavaScript_. In _ES5_ this nonsense has been partially corrected: now this will point to null inside these functions - This is still far from the ideal behaviour, however: it would have been better passing a reference to the object inside which the function is called (which would have also solved our problem above in the first place).
 
-* Using apply/call: by using this methods of the **_Function_** prototype, we can set the reference stored in this inside the function body by passing it as a first parameter to the method: funB.apply(module) or funB.call(module) would do the trick. (The difference between apply and call is that the former takes the arguments for the function as an array as its second argument, while for the latter the actual parameters must be listed after the first parameter).
+* **Using _apply_/_call_**: by using this methods of the **_Function_** prototype, we can set the reference stored in this inside the function body by passing it as a first parameter to the method: **_funB.apply(module)_** or **_funB.call(module)_** would do the trick. (The difference between **_apply_** and **_call_** is that the former takes the arguments for the function as an array as its second argument, while for the latter the actual parameters must be listed after the first parameter).
 
 ## So... why isn't it working?
 
