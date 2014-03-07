@@ -5,7 +5,7 @@ title: You'd better stay away from the "this" trap when defining a _JavaScript_ 
 
 ## _JavaScript_ **_this_** pointer is actually evil... especially if you are going to export modules.
 
-## Let's start with an example
+### Let's start with an example
 
 {% highlight javascript %}
 
@@ -44,7 +44,7 @@ because the value of **_this_** will either be **_null_** or **_window_**, depen
 If we had called **_funB_** as **_module.funB()_**, there would have been no problem, and the execution would proceed as expected: let's see why!
 
 
-##A step back: The this pointer
+###A step back: The this pointer
 
 The Internet is crammed with literature on the infamous "**_this_**" pointer. It actually is one of those [bad parts](http://yuiblog.com/blog/2007/06/08/video-crockford-goodstuff/) highlighted by [Douglas Crockford](http://javascript.crockford.com/); the main reason of its evilness is that function context depends on the way you call it.
 
@@ -59,7 +59,7 @@ There are, in fact, 4 different ways in which you can invoke a function, produci
 
 * **Using _apply_/_call_**: by using these methods of the **_Function_** prototype, we can set the reference stored by **_this_** inside the function body by passing it as a first parameter to the method: **_funB.apply(module)_** or **_funB.call(module)_** would do the trick. (The difference between **_apply_** and **_call_** is that the former takes the arguments for the function as an array (its second argument), while for the latter the actual parameters must be listed after the first parameter).
 
-## So... why isn't it working?
+### So... why isn't it working?
 
 Let's try another test first:
 
@@ -92,7 +92,7 @@ Turns out that, if you assign a method to a variable (either by explicitily stor
 Therefore the **_this_** pointer will be inconsistent with what the way we'd expect the function to be used.
 Since we have no control on how a user of our libraries will use it, using references to **this** in public methods (methods that, directly or indirectly, can be called from outside our module) is simply **UNSAFE**.
 
-## A simple solution
+### A simple solution
 
 The solution, however, is really at hand:
 
