@@ -57,7 +57,7 @@ There are, in fact, 4 different ways in which you can invoke a function, produci
 
 * **As a function**: Here the behaviour depends on if you are using strict mode (i.e. _EcmaScript 5_) or not; before _ES5_, the **_this_** pointer passed to the function invoked would have been a reference to the global object (i.e. **_window_**): this was one of the most common bug sources in _JavaScript_. In _ES5_ this nonsense has been partially corrected: now this will point to null inside these functions - This is still far from the ideal behaviour, however: it would have been better passing a reference to the object inside which the function is called (which would have also solved our problem above in the first place).
 
-* **Using _apply_/_call_**: by using this methods of the **_Function_** prototype, we can set the reference stored in this inside the function body by passing it as a first parameter to the method: **_funB.apply(module)_** or **_funB.call(module)_** would do the trick. (The difference between **_apply_** and **_call_** is that the former takes the arguments for the function as an array as its second argument, while for the latter the actual parameters must be listed after the first parameter).
+* **Using _apply_/_call_**: by using these methods of the **_Function_** prototype, we can set the reference stored by **_this_** inside the function body by passing it as a first parameter to the method: **_funB.apply(module)_** or **_funB.call(module)_** would do the trick. (The difference between **_apply_** and **_call_** is that the former takes the arguments for the function as an array (its second argument), while for the latter the actual parameters must be listed after the first parameter).
 
 ## So... why isn't it working?
 
@@ -87,9 +87,9 @@ testThis();
 
 Do you think that anything changes now? Of course not!
 
-Turns out that, if you assign a method to a variable (either by explicitily assigning it to a var or by passing it as a parameter), the Function object you are storing won't retain the information about its context, so when invoked it will be invoked as... a function (since it is one!).
+Turns out that, if you assign a method to a variable (either by explicitily storing it in a **_var_** or by passing it as a parameter), the **_Function_** object you are storing won't retain the information about its context, so when called it will be invoked as... a function (since it is one!).
 
-Therefore the this pointer will be inconsistent with what the way we'd expect the function to be used.
+Therefore the **_this_** pointer will be inconsistent with what the way we'd expect the function to be used.
 Since we have no control on how a user of our libraries will use it, using references to **this** in public methods (methods that, directly or indirectly, can be called from outside our module) is simply **UNSAFE**.
 
 ## A simple solution
@@ -116,9 +116,9 @@ var testThis = module.funB;
 testThis();
 {% endhighlight %}
 
-simply declare the module as a private module attribute, and replace every occurrence of **_this_** with a reference to that attribute.
+Simply create the module as a private module attribute, and replace every occurrence of **_this_** with a reference to that attribute.
 
-To further improve the design of our module, I'd suggest a little improvement made possible by strict mode:
+To further improve the design of our module, I'd suggest a little improvement made possible by **strict mode**:
 
 {% highlight javascript %}
 function declareModuleTest () {
@@ -146,4 +146,4 @@ testThis();
 
 This way, you make sure your module can't be tampered with by users (which you might care, especially if external users act as middlemen at some point).
 
-If you target only newer browsers versions, and you either check at the very beginning for _ES5_ compatibility, or you are fine with causing crashes in earlier versions (definitely do not take it as an advice! :D), you can remove the test on **_Object.seal_**.
+If you target only newer browsers versions, and you either check at the very beginning for _ES5_ compatibility, or you are fine with causing crashes in earlier versions (definitely **do not** take it as an advice! :D), you can remove the test on **_Object.seal_**.
