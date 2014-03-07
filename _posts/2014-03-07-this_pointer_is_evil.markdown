@@ -32,16 +32,16 @@ testThis(module.funB);
 
 {% endhighlight %}
 
-What is the expected outcome, in your opinion? What do you think it will be the value of _this_ inside _funB_, when called from _testThis_?
+What is the expected outcome, in your opinion? What do you think it will be the value of **_this_** inside _funB_, when called from **_testThis_**?
 Chances are you haven't bet on "page will crash", but actually this is the case: an exception will be thrown at this line
 
 {% highlight javascript %}
     return this.funA();
 {% endhighlight %}
 
-because the value of _this_ will either be _null_ or _window_, depending on if you are using [**strict mode**](http://ejohn.org/blog/ecmascript-5-strict-mode-json-and-more/).
+because the value of **_this_** will either be **_null_** or **_window_**, depending on if you are using [**strict mode**](http://ejohn.org/blog/ecmascript-5-strict-mode-json-and-more/).
 
-If we had called _funB_ as _module.funB()_, there would have been no problem, and the execution would proceed as expected: let's see why!
+If we had called **_funB_** as **_module.funB()_**, there would have been no problem, and the execution would proceed as expected: let's see why!
 
 
 ##A step back: The this pointer
@@ -51,13 +51,13 @@ The Internet is crammed with literature on the infamous "this" pointer. It actua
 There are, in fact, 4 different ways in which you can invoke a function, producing different values for the this pointer:
 
 
-* Using _new_ keyword: in this case, the function is invoked as a constructor, and _this_ is assigned the reference of the newly created Object (that, by the way, will be returned at the end of the method).
+* Using **_new_** keyword: in this case, the function is invoked as a constructor, and **_this_** is assigned the reference of the newly created Object (that, by the way, will be returned at the end of the method).
 
-* As an object method: If an object instance _obj_ has a method _m_, and you call it as _obj.m()_, then the this pointer inside m will be the reference to _obj_.
+* As an object method: If an object instance **_obj_** has a method **_m_**, and you call it as **_obj.m()_**, then the this pointer inside **_m_** will be the reference to **_obj_**.
 
-* As a standalone function: Here the behaviour depends on if you are using strict mode (i.e. EcmaScript 5) or not; before ES5, the this pointer passed to the function invoked would have been a reference to the global object (i.e. _window_): this was one of the most common bug sources in JavaScript. In ES5 this nonsense has been partially corrected: now this will point to null inside these functions - This is still far from the ideal behaviour, however: it would have been better passing a reference to the object inside which the function is called (which would have also solved our problem above in the first place).
+* As a standalone function: Here the behaviour depends on if you are using strict mode (i.e. _EcmaScript 5_) or not; before _ES5_, the this pointer passed to the function invoked would have been a reference to the global object (i.e. **_window_**): this was one of the most common bug sources in JavaScript. In _ES5_ this nonsense has been partially corrected: now this will point to null inside these functions - This is still far from the ideal behaviour, however: it would have been better passing a reference to the object inside which the function is called (which would have also solved our problem above in the first place).
 
-* Using apply/call: by using this methods of the _Function_ prototype, we can set the reference stored in this inside the function body by passing it as a first parameter to the method: funB.apply(module) or funB.call(module) would do the trick. (The difference between apply and call is that the former takes the arguments for the function as an array as its second argument, while for the latter the actual parameters must be listed after the first parameter).
+* Using apply/call: by using this methods of the **_Function_** prototype, we can set the reference stored in this inside the function body by passing it as a first parameter to the method: funB.apply(module) or funB.call(module) would do the trick. (The difference between apply and call is that the former takes the arguments for the function as an array as its second argument, while for the latter the actual parameters must be listed after the first parameter).
 
 ## So... why isn't it working?
 
@@ -116,7 +116,7 @@ var testThis = module.funB;
 testThis();
 {% endhighlight %}
 
-simply declare the module as a private module attribute, and replace every occurrence of _this_ with a reference to that attribute.
+simply declare the module as a private module attribute, and replace every occurrence of **_this_** with a reference to that attribute.
 
 To further improve the design of our module, I'd suggest a little improvement made possible by strict mode:
 
@@ -146,4 +146,4 @@ testThis();
 
 This way, you make sure your module can't be tampered with by users (which you might care, especially if external users act as middlemen at some point).
 
-If you target only newer browsers versions, and you either check at the very beginning for ES5 compatibility, or you are fine with causing crashes in earlier versions (definitely do not take it as an advice! :D), you can remove the test on _Object.seal_.
+If you target only newer browsers versions, and you either check at the very beginning for _ES5_ compatibility, or you are fine with causing crashes in earlier versions (definitely do not take it as an advice! :D), you can remove the test on **_Object.seal_**.
