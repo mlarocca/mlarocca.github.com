@@ -5,6 +5,7 @@ title: You'd better stay away from the "this" trap when defining a _JavaScript_ 
 
 ## _JavaScript_ **_this_** pointer is actually evil... especially if you are going to export modules.
 
+
 ### Let's start with an example
 
 {% highlight javascript %}
