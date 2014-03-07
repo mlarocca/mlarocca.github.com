@@ -1,6 +1,6 @@
 ---
 layout: post
-title: You'd better stay away from the "this" trap when defining a _JavaScript_ module
+title: You'd better stay away from the "this" trap when defining a JavaScript module
 ---
 
 ## _JavaScript_ **_this_** pointer is actually evil... especially if you are going to export modules.
