@@ -7,14 +7,14 @@ title: Reengineering TubeHound, a video search aggregator
 
 ![thound](../images/thound.jpg)
 
-##What
+###What
 
 A video search aggregator, is a tool that makes your life easier when you need to query online videos. There are many ways to aggregate your searches, and to help you find what you are looking for.
 The idea behind [__TubeHound__](http://thound.herokuapp.com/) is that sometimes, when you are looking for videos about a certain topic, you might as well be interested in videos which do not directly match your search, but are nonetheless connected to the ones that do. For example, when you are looking for a [trailer](http://thound.herokuapp.com/search/monuments%20men/1) of a certain movie, you might be interested to watch trailers of similar movies. Or, if you are looking for a tutorial by a specific content producer, say a [cooking tutorial](http://thound.herokuapp.com/search/Gordon%20Ramsay's%20Ultimate%20Cookery%20Course%20S01E01/1) from your favourite chef, you are probably interested in acknowledging the existence of other chefs who release tutorials, and maybe, once you notice them, you might be interested in searching more results about them.
 
 [__TubeHound__](http://thound.herokuapp.com/), for every query you submit, shows you many results related to the videos matching you search terms, and allows you to refocus your search with a couple of mouse clicks: the goal is making navigation among your results as easy as following your stream of thoughts.
 
-##Why
+###Why
 
 When I first thought about creating [__TubeHound__](http://thound.herokuapp.com/), in its earliest version, I was just unhappy with the way video hosting's search engines work.
 Then, I read about [__Meteor__](https://www.meteor.com/), and this looked like the perfect project to start learning about it.
@@ -27,7 +27,7 @@ After completing a [beta version](http://thound.meteor.com) in late 2012, I had 
 Recently, I started using [__RactiveJs__](http://www.ractivejs.org/), and it immediately looked obvious to me that it was a perfect choice to reengineer [__TubeHound__](http://thound.herokuapp.com/), because it was lightweight, and it provided reactive templates that could be managed with little or no effort.
 So I decided to start over, from scratch (almost).
 
-##How
+###How
 
 Once I decided to reengineer my app, the first step was to find out which features added the most value to it, and which ones were worth implementing. So I tried to apply the Pareto Principle, i.e. "find the 20% of your features that add 80% value to your business (or project)".
 For [__TubeHound__](http://thound.herokuapp.com/), it meant trimming off functionalities like user management, registration, and playlists. The plan is to add them later, especially the playlist as a sort of memory for your searches, but they are not the main goal of the website, not its added value.
@@ -44,12 +44,12 @@ This division is targeted to ease the load on the server taking care of the vide
 For the front end, I chose [__jQuery__](http://jquery.com) and [__Bootstrap__](http://getbootstrap.com/) to take care of DOM manipulation and layout, [__RequireJS__](http://requirejs.org/) to structure the AMD modules and organize dependencies, and [__RactiveJs__](http://www.ractivejs.org/) to add reactivity to the page.
 
 
-##When
+###When
 
 Or I should rather say "how long": well, it took me just 2 weeks to create the new version of [__TubeHound__](http://thound.herokuapp.com/). Although this is a simplified version of the original one, and I was able to re-use some functions (very few, actually) from the previous version, I was stunned by how simple the development was, and how fast I could create a functioning version - even if I had to create a completely new design!
 The development of the original version had taken a lot more time. Excluding the Python back-end, which remained the same, it required at least 2 months to learn __Meteor__ and create a working example.
 
-##Differences
+###Differences
 
 It's not that __Meteor__ isn't a great tool. It is, indeed. Just - as every tool - you need to find the right job to employ it. Or, complementary, for every job you need to carefully choose the right tool - if you are familiar with _Maslow's hammer law_, you might have already figured out this is a textbook case.
 
@@ -65,7 +65,7 @@ I personally also find the way __Ractive__ lets you use expressions inside templ
 
 Another great tool you could use instead of __Ractive__, in fact, is [__AngularJs__](http://angularjs.org/). You can read a bit more about differences and similarities between the two of them online, perhaps starting from [here](http://blog.ractivejs.org/posts/whats-the-difference-between-angular-and-ractive) and - why not? - [here](http://mlarocca.github.io/01-22-2014/pathsjs_ractive.html).
 
-##Conclusions
+###Conclusions
 
 When you start a new project, you should definitely take some time pinning down your requirements and figuring out the right technology stack for your needs - every minute you spend on this, will likely save you dozens of hours of frustration later.
 
