@@ -3,7 +3,7 @@ layout: post
 title: Reactive SVG charts with Ractive.js and Paths.js
 ---
 
-##Ractive
+###Ractive
 
 
 __Ractive.js__ is a nice, lightweight library that allows you to easily add reactive behaviour to your web page.
@@ -130,7 +130,7 @@ The crucial part we are interested in, is the template:
 
 If you know D3, Raphael, or other similar SVG libraries, this might look a bit odd, since you are probably used to create SVG nodes from JavaScript. Here, instead, thanks to reactive programming, we take a different direction, creating the chart inside the html file; this enables us to better separate data from the structure of the charts, in the same way discussed above for _HTML_.
 
-##Paths.js
+###Paths.js
 
 Paths.js is another minimal library by [Andrea Ferretti](https://github.com/andreaferretti) that is, explicitly and by design, oriented to support reactive programming by generating SVG paths that can be used with template engines. It looks like a perfect match for __Ractive__, and it actually is: take a look at this [demo](http://andreaferretti.github.io/paths-js-demo/) - source available on [GitHub](https://github.com/andreaferretti/paths-js-demo).
 The source is in CoffeeScript, so - if you feel more like a JavaScript guy - take a look at its JS counterpart!
@@ -289,10 +289,9 @@ Notice, for example, how you declare the chart, and then iterate on its building
       </g>
     {% raw  %}{{/ curves }}{% endraw  %}
   {% raw  %}{{/ end of pie}}{% endraw  %}
-
 {% endhighlight %}
 
-##Key points
+###Key points
 
 1. __Ractive__ allows you to iterate over objects returned by function calls. It lists the dependencies for the expression, so that every time one of the objects it depends on is changed, the nodes affected by this change (and only those nodes) are redrawn.
 
@@ -308,7 +307,7 @@ Notice, for example, how you declare the chart, and then iterate on its building
 
 7. Event handling: for each proxy event only a single handler is added; they are handled in a very efficient way, namely even more efficient than delegation, and as elements are added and removed, their handlers are automatically been taken care of. Overall, that also helps performance. A lot. (You can read more [here](http://learn.ractivejs.org/event-proxies/5/))
 
-##Conclusions
+###Conclusions
 
 I hope this example raised your interest, or at least your curiosity, about this two great libraries. Of course, they are is no _panacea_ in software development, and you have to evaluate each single project to understand what libraries, framework and technologies best fit your needs.
 But hopefully by now you realize you have one more arrow in your quiver, and a particularly good one, I'd say.
