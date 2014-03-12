@@ -3,7 +3,7 @@ layout: post
 title: Promises, noSql, joins... and more promises
 ---
 
-##Intro
+###Intro
 
 
 Two of the top trending terms of the last couple of years in the tech world are, sure enough, promises and nosql.
@@ -14,7 +14,7 @@ Now, you might wonder, how are these two subjects possibly related? Well, first 
 
 However, as hard as it can be to believe, I want to talk about what I think it is another contact point between the two of them: joins.
 
-###Promises
+####Promises
 
 Let's take a step back, first, to briefly describe what promises and noSql DBs are. In particular, I'm going to refer to jQuery implementation of the [Promise/A](http://wiki.commonjs.org/wiki/Promises/A) proposal, and Google App Engine datastore.
 
@@ -28,7 +28,7 @@ If you need to get in deeper into the subject, I found this two posts very clear
 
 Also, if you have some spare time, some theory and the __Scala__ approach are very extensively explained in the [Coursera](http://coursera.org/) course about [Reactive programming in Scala](https://class.coursera.org/reactive-001).
 
-###NoSql
+####NoSql
 
 While promises/futures have been around since the 70s (although only in the last few years they became widely used), NoSql databases are a more recent idea.
 For decades, since relational databases where invented, we were thought that thr third normal form (or at least some kind of normal form) was the goal every DB architect should aspire to.
@@ -46,7 +46,7 @@ If you want to get further information about this subject, I suggest investing y
 
 Also, be sure to check this great talk: [Google I/O 2012 - SQL vs NoSQL: Battle of the Backends](http://www.youtube.com/watch?v=rRoy6I4gKWU&list=WLB663AFEDE79B3691)
 
-###NoSql in practice
+####NoSql in practice
 
 To go back to __GAE__, as you probably know it gives you a semi-free service to host your Java/Python/Php/Go applications. Upon registration, you are provided for free with a certain amount of bandwidth and DB transactions for free, but you can also buy payed plans and pay for what you actually use.
 You can choose to use mySql for your DB, but as a default, your app will be connected to the datastore, which is based on google BigTable which in turn is built on Google File system, and the whole infrastructure is targeted to allow for seamless, maximum scalability, using a noSql approach.
@@ -54,11 +54,11 @@ This means, you don't have joins. Well, at least you didn't in the earliest days
 
 If you decide to use [MongoDB](http://www.mongodb.org) or [Redis](http://redis.io) with [NodeJS](http://nodejs.org) on [Heroku](http://heroku.com), for example, you are going to run into the exact same issues, so the problem is a general one, and I'll try to give a general solution.
 
-##NoSql and joins
+###NoSql and joins
 
 Let's assume you designed your application and, given its characteristics, you opted for a nosql solution. Then, either during the design phase or at some point during development, you realize that, while 99% of your traffic will not require cross-entities (cross-tables, to use a more SQL-ish terminology) queries, occasionally you'll need joins on two or more tables (perhaps for a rarely used but high-value feature, perhaps to compute monthly statistics). Once again, let's assume it isn't a critical feature - otherwise, you would need a different solution - and - without any loss in generality - only two tables are involved. The only solution is, you tun two different queries, and then, for each row of the first table, you look for the proper row in the second one (or for the proper rows, depending on the kind of join).
 
-###Pseudo-join in a synchronous environment
+####Pseudo-join in a synchronous environment
 
 In a synchronous environment, you then have to run the first query, then run the second one, then merge the two retrieved datasets together. And between each query, your program will have to wait for the request to be completed. To make the situation worse, let's say you have to preprocess each dataset before being able to merge the two of them together. So the flow of control becomes:
 
@@ -86,7 +86,7 @@ doSomething(result);
 __next_statement__
 {% endhighlight %}
 
-###Pseudo-join in an asynchronous environment
+####Pseudo-join in an asynchronous environment
 
 Since some of this calls are asynchronous or equivalently have an asynchronous version, you might want to switch to a different flow of execution. But, without using promises, what would you do? You'd use nested callbacks, so for example, in pseudo-JavaScript:
 
@@ -149,7 +149,7 @@ queryDB_Asynch(query2, function(err2, data2) {
 
 The point is, there is no way you can tell which query will return first. Even if there is a huge difference in the size of the tables and/or in the number of results retrieved, when dealing with asynch calls, the behaviour is unpredictable, because a lot of issues could cause an unexpected latency.
 
-###Exploiting asynchronicity - the wronger way
+####Exploiting asynchronicity - the wronger way
 
 It might look like employing flag variables to check if the other branch has been completed is a good idea:
 
@@ -182,7 +182,7 @@ As you can perhaps have already guessed, it isn't! This is not only inefficient,
 As unlikely as it can be, since there is no way to ensure locks or atomicity, it can happen that between the execution of the if statement that checks queryCompleted_i in the first branch to complete the query and the next execution of the assignment in the relative else branch, the other branch reaches as well the same execution points, so that in that branch the if condition fails as well, and none of them ends up merging the results and calling doSomething. Since you don't control the order of execution of the instructions, you can't make any assumption.
 And clearly a race condition is hardly ever an acceptable risk.
 
-##Promises save the day
+###Promises save the day
 
 So, this is where promises and deferred comes into play.
 
@@ -239,14 +239,14 @@ $.when(queryBranch_1.promise(), queryBranch_2.promise())
 
 Simple, elegant, efficient and race-free.
 
-##Conclusions
+###Conclusions
 
 Will see an example in a second. I just wanted to state a few considerations about the issue.
 Well, the JavaScript-simulated JOIN was mainly an excuse to talk about neat tricks with promises, but, as I said earlier, there are scenarios where you can actually need it. I recently bumped into one of these, and I'm glad I had to work my way to this solution - so I thought it might be helpful to share it.
 There is, of course, a penalty you have to pay: I tried running the same query as a native JOIN on a BigQuery DB, and as a JavaScript-simulated join: the native version is, as expected, much faster - the speedup is more than 10x!
 So if you need to perform joins often and if it's a critical operation for your application, you might want to reconsider your DB solution, or at least you must take this performance tradeoff into account.
 
-##Real code
+###Real code
 
 Now, here it is a real-life example of simulated left join query in JavaScript, retrieving JSON data from a DB through ajax calls; this example uses promises a bit more extensively because takes authentication into account as well.
 
