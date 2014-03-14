@@ -92,7 +92,7 @@ New features added:
 * Help page available from the extension itself.
 
 
-VERSION 2.0.4
+#### VERSION 2.0.4
 ================
 
 * The color used for highlighting can be chosen from the 'Options' page available in the chrome extensions tab.
