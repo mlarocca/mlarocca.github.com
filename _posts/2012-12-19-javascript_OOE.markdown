@@ -148,7 +148,7 @@ We therefore need to decouple this two aspects, and the perfect way to do so is 
 How cool is that, right? But, you know, everything comes with a price, and this time the price is that you can't have any public attribute in your classes. Is that bad? Well, not really: you just need to define the appropriate getters and setters methods for this attributes, being careful to declare them as public methods, and you're good to go! Even better, this forces you to abide with the strongest version of encapsulation best practice: no attribute should be public, but should only be accessed trough getters and setters - call it Ruby style, if you prefer.
 
 Let's see a full example, to (hopefully!) help clarifying a bit.
-First we can add a shortcut to "Object" object to help with the creation of public and protected methods (please take a look at it in the source code [here](https://github.com/mlarocca/)); it's also good to have a few more utility functions, like one to get super version of an overridden method.
+First we can add a shortcut to "Object" object to help with the creation of public and protected methods (please take a look at it in the source code [here](https://github.com/mlarocca/Javascript-OOE)); it's also good to have a few more utility functions, like one to get super version of an overridden method.
 With those tools in our belt, here is what we could obtain:
 
 {% highlight javascript %}
