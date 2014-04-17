@@ -8,8 +8,8 @@ While developing a plugin for the D3 graphic library, I found myself facing one 
 Don't get me wrong, there are many different known techniques to safely and effectively keep private attributes and methods really private (mostly involving closure and local vars), as well as there are many more to mimic inheritance, from pseudo-classical to prototypal or parasitic ones.
 A very good source of inspiration for all of these techniques can be found on _Douglas Crockford_ web sites or, if you have a little bit more time, in some of his great videos on _YUITheather_ (a must for any JS developer).
 
-But as far as I know there have been only a few attempts to cope with both problems at the same time: there is no "protected" encapsulation in JavaScript, and none of them looks particularly easy or satisfying to me.
-And that's a bummer, I mean, web development today is all about mash-ups, and every JS engineer  at some point will have to exploit mash-ups, so she will be (well, at least he really SHOULD BE) necessarily concerned about the methods that his objects are going to expose to consumers.
+But as far as I know there have been only a few attempts to cope with both problems at the same time: there is no "protected" encapsulation in JavaScript, and none of them looks particularly easy or satisfying to me. Even CoffeeScript doesn't addresses this problem, despite having built around class-oriented syntactic sugar one of its most desirable features.
+And that's a bummer, I mean, web development today is all about mash-ups, and every JS engineer at some point will have to exploit mash-ups, so she will be (well, at least he really SHOULD BE) necessarily concerned about the methods that his objects are going to expose to consumers.
 
 The most common solution starts, or at least it should, from embracing an Object Capability System.
 In such a paradigm, Objects can communicate with other objects only if they have a reference to them (as usual), but an Object A can obtain a reference to an Object C only in one of the following 3 ways:
@@ -142,7 +142,7 @@ Basically, all we need is adding a single method to the Object class:
     }
 {% endhighlight %}
 
-One more thing we need to stress out: in order to have inheritance properly working, we need to handle original objects to the ones that are inheriting from them, but to avoid any possible encapsulation violation, the consumer should be able to access only their wrapped-in-proxy versions.
+One more thing we need to stress: in order to have inheritance properly working, we need to handle original objects to the ones that are inheriting from them, but to avoid any possible encapsulation violation, the consumer should be able to access only their wrapped-in-proxy versions.
 We therefore need to decouple this two aspects, and the perfect way to do so is through a factory. The factory will have internal private (pseudo)constructors for all our objects, and will expose only methods that creates a new object by returning its proxified version.
 
 How cool is that, right? But, you know, everything comes with a price, and this time the price is that you can't have any public attribute in your classes. Is that bad? Well, not really: you just need to define the appropriate getters and setters methods for this attributes, being careful to declare them as public methods, and you're good to go! Even better, this forces you to abide with the strongest version of encapsulation best practice: no attribute should be public, but should only be accessed trough getters and setters - call it Ruby style, if you prefer.
@@ -252,5 +252,5 @@ var Factory = (
     })();
 {% endhighlight %}
 
-And... that's about it!
+And... that's pretty much everything you need!
 Please feel free to drop a line if you have suggestions or you spotted a bug!
