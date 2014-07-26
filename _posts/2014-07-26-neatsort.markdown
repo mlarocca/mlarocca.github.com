@@ -21,7 +21,7 @@ This is where __NeatSort__ comes into play. It is a nice, simple adaptive algori
 
 It performs so well, in fact, that proves way faster than __Mergesort__, and even comparable or faster than __QuickSort__, consistently on different hardware and OSs, even when benchmarked on random inputs.
 
-![chart](../images/neatsort_fig_4.png)
+![chart](../images/neatsort_fig_4.jpg)
 
 I'm not going to delve into technical details here: If you want to take a closer look, I suggest you to read directly our [first draft](http://arxiv.org/abs/1407.6183) on [arXiv.org](http://arXiv.org). It's 23-pages long, but don't worry, it's filled with a lot of charts like the one above.
 
