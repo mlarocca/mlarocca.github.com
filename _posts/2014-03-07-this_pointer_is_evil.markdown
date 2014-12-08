@@ -148,3 +148,30 @@ testThis();
 This way, you make sure your module can't be tampered with by users (which you might care, especially if external users act as middlemen at some point).
 
 If you target only newer browsers versions, and you either check at the very beginning for _ES5_ compatibility, or you are fine with causing crashes in earlier versions (definitely **do not** take it as an advice! :D), you can remove the test on **_Object.seal_**.
+
+### bind()
+
+Yet another solution, perhaps the most elegant of all, is using the _Function.prototype.bind_ method, which is, again, available in [ES5](http://kangax.github.io/compat-table/es5/#Function.prototype.bind). This method allows you to force the value of this inside any function expression.
+
+{% highlight javascript %}
+
+var tmpObj = {};   //Any object you might need
+
+function declareModuleTest () {
+
+  return {
+    funA: function funA () {
+      console.log("A",this);
+    }.bind(this),
+    funB: function funB () {
+      console.log("B", this);
+      return this.funA();
+    }
+  }
+}
+
+var module = declareModuleTest();
+
+var testThis = module.funB.bind(tmpObj);
+testThis();
+{% endhighlight %}
